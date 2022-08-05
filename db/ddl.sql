@@ -1,5 +1,5 @@
-CREATE DATABASE dontstave;
-\c dontstave;
+CREATE DATABASE dontstarve;
+\c dontstarve;
 
 DROP TABLE IF EXISTS mapa;
 DROP TABLE IF EXISTS bioma;
@@ -66,8 +66,7 @@ CREATE TABLE instancia_item(
 CREATE TABLE instancia_item_posicao(
     id_posicao INT NOT NULL,
     id_instancia_item INT NOT NULL, 
-    CONSTRAINT instancia_item_posicao_pk PRIMARY KEY(id_posicao),
-    CONSTRAINT instancia_item_posicao_sk UNIQUE(id_instancia_item),
+    CONSTRAINT instancia_item_posicao_pk PRIMARY KEY(id_posicao,id_instancia_item),
     CONSTRAINT id_posicao_instancia_item_posicao_fk FOREIGN KEY(id_posicao) REFERENCES posicao(id),
     CONSTRAINT id_instancia_instancia_item_posicao_fk FOREIGN KEY(id_instancia_item) REFERENCES instancia_item(id)
 );
@@ -109,8 +108,8 @@ CREATE TABLE jogador(
 
 CREATE TABLE arma(
     id SERIAL,
-    dano INT NOT NULL,
     nome texto NOT NULL,
+    dano INT NOT NULL,
     descricao descricao NOT NULL,
     CONSTRAINT arma_pk PRIMARY KEY(id),
     CONSTRAINT nome_arma_sk UNIQUE(nome)

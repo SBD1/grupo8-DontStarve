@@ -1,7 +1,7 @@
 -- mapa
-INSERT INTO mapa VALUES (2, '1997-08-24', 25, 'p');
+INSERT INTO mapa VALUES (DEFAULT, '1997-08-24', 25, 'p');
 -- bioma
-INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (1, 0.1, 10, 'floresta');
+INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.1, 10, 'floresta');
 
 -- posicaoes
 INSERT INTO posicao VALUES (DEFAULT, 1, 1 , NULL, NULL , NULL , NULL,'Voce esta no limite superior da fronteira, onde os mares verdejantes impedem a sua saida da mata');
@@ -18,12 +18,26 @@ UPDATE posicao SET norte = 3 WHERE id=5;
 -- 2 3 4
 -- 0 5 0
 
+-- arma
+INSERT INTO arma VALUES (DEFAULT, 'Machado', 10, 'Machado tambem é uma arma');
+
+-- ferramenta
+INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta', 'bater em pedra', 'Picareta nao é de escrever');
+INSERT INTO ferramenta VALUES (DEFAULT, 'Workbench', 'Fazer coisas', 'workbench é de escrever');
+
+-- roupa
+INSERT INTO roupa VALUES (DEFAULT, 'Casaco', 10,5,'Casaco de frio');
+
+-- ingrediente
+INSERT INTO ingrediente VALUES (DEFAULT, 'cipo', 'ingrediente', 'Uma corda natual!');
+
+
 -- instancia_item
-INSERT INTO instancia_item  VALUES (1, 'a'); -- machado
-INSERT INTO instancia_item  VALUES (2, 'f'); -- picareta
-INSERT INTO instancia_item  VALUES (3, 'f'); -- workbench
-INSERT INTO instancia_item  VALUES (4, 'r'); -- frio
-INSERT INTO instancia_item  VALUES (5, 'i'); -- cipo
+INSERT INTO instancia_item  VALUES (DEFAULT,1, 'a'); -- machado
+INSERT INTO instancia_item  VALUES (DEFAULT,1, 'f'); -- picareta
+INSERT INTO instancia_item  VALUES (DEFAULT,2, 'f'); -- workbench
+INSERT INTO instancia_item  VALUES (DEFAULT,4, 'r'); -- frio
+INSERT INTO instancia_item  VALUES (DEFAULT,1, 'i'); -- cipo
 
 -- instancia_item_posicao
 INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
@@ -32,23 +46,12 @@ INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
 INSERT INTO monstro VALUES (DEFAULT,'PernaL ongas',1,'Perna Longas é um monstro',20,1,4);
 INSERT INTO monstro VALUES (DEFAULT,'Gato de botas',10,'Gato de botas é um monstro',100,3,5);
 
--- jogador
-INSERT INTO jogador VALUES (1, 'Joao', 3,NULL,NULL);
-
 -- mochila
-INSERT INTO mochila VALUES (1, 1);
+INSERT INTO mochila VALUES (1);
 
--- arma
-INSERT INTO arma VALUES (1, 'Machado', 10, 'Machado tambem é uma arma');
+-- jogador
+INSERT INTO jogador VALUES (DEFAULT, 'Joao',1, 3,NULL,NULL);
 
--- ferramenta
-INSERT INTO ferramenta VALUES (2, 'Picareta', 'bater em coisa', 'Picareta nao é de escrever');
-
--- roupa
-INSERT INTO roupa VALUES (DEFAULT, 'Frio', 10,5,'Casaco de frio');
-
--- ingrediente
-INSERT INTO ingrediente VALUES (DEFAULT, 'cipo', 'ingrediente', 'Uma corda natual!');
 
 -- mochila_guarda_instancia_de_item
 INSERT INTO mochila_guarda_instancia_de_item VALUES (1, 5);
