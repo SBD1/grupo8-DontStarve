@@ -1,4 +1,4 @@
-# Grupo 9 - Don't Starve
+# Grupo 8 - Don't Starve
 Repositório para desenvolvimento do projeto de Don't Starve, do grupo 9, na disciplina Sistema de Banco de Dados 1 com o professor Maurício Serrano, FGA - UnB.
 
 
