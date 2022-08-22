@@ -4,7 +4,7 @@ jogador = type('', (), {})()
 
 jogador.id = 1
 jogador.nome = 'player1'
-
+jogador.vida = 100
 jogador.id_mochila = 1
 jogador.id_posicao = 0
 jogador.id_roupa_equipada = None
@@ -44,6 +44,14 @@ pos2.descricao = 'floresta ao oeste'
 pos2.pedras = 0
 
 # end mock pos
+
+# mock bioma
+bioma1 = type('', (), {})()
+bioma1.id = 1
+bioma1.chance_batalha = 0.30 # 30%
+bioma1.delta_temp = 10
+bioma1.nome = 'floresta'
+# end mock bioma
 
 # mock arma
 item1 = type('', (), {})()
@@ -294,9 +302,41 @@ craft3.quant_item3 = None
 craft3.necessita_workbench = True
 craft3.id_item_resultado = 1
 
-
 # end mock craft
+
+# mock monstros
+monstro1 = type('', (), {})()
+monstro1.id = 1
+monstro1.nome = 'coelho'
+monstro1.descricao = 'igualzinho a seu jantar.'
+monstro1.dano = 2
+monstro1.vida = 15
+monstro1.isca = 0
+monstro1.id_posicao = 0
+
+monstro2 = type('', (), {})()
+monstro2.id = 2
+monstro2.nome = 'lobo'
+monstro2.descricao = 'quem come seu jantar.'
+monstro2.dano = 8
+monstro2.vida = 40
+monstro2.isca = 1
+monstro2.id_posicao = 0
+# end mock monstros
+
 # end mock
+
+
+def get_jogador():
+    return jogador
+
+
+def del_jogador(jogador):
+    return
+
+
+def set_vida_jogador(jogador, vida):
+    jogador.vida = vida
 
 def get_jogos_salvos():
     # retornar todos os jog adores salvos em array
@@ -305,7 +345,7 @@ def get_jogos_salvos():
 
 
 def novo_jogador(nome: str):
-    # inserir novo jogador no bd, em caso de falha retornar -1
+    # inserir novo jogador no bd, em caso de falha retornar False
     # em caso de sucesso:
     return nome
 
@@ -509,6 +549,33 @@ def adicionar_item_iventario(jogador, id_instancia_item):
     mochila = eval(f'item_mochila{id_instancia_item}')
     mochila.id_mochila = 1
     return True
+
+
+def get_bioma(id_bioma):
+
+    if id_bioma == 1: 
+        return bioma1
+
+
+
+def get_monstros_by_pos(id_pos):
+    i = 0
+    monstros = []
+    while True:
+        i+=1
+
+        try:
+            monstro = eval(f'monstro{i}')
+            if monstro.id_posicao == id_pos:
+                monstros.append(monstro)
+        except:
+            break
+
+    return monstros
+
+def del_monstro(id_monstro):
+    foo = eval(f'monstro{id_monstro}')
+    del foo
 
 # def get_posicoes_vizinhas(posicao_jogador):
 #     vizinhos = []

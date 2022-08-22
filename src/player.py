@@ -2,6 +2,10 @@ import bd
 import menu
 import world
 
+import time
+import sys
+import os
+
 def andar(jogador, posicao_jogador):
     menu.clear()
 
@@ -26,15 +30,19 @@ def andar(jogador, posicao_jogador):
             continue
 
         if opt_andar == 1 and posicao_jogador.norte != None:
+            world.verificar_luta(jogador, posicao_jogador.norte)
             bd.set_posicao_jogador(jogador, posicao_jogador.norte)
             return True
         if opt_andar == 2 and posicao_jogador.sul != None:
+            world.verificar_luta(jogador, posicao_jogador.sul)
             bd.set_posicao_jogador(jogador, posicao_jogador.sul)
             return True
         if opt_andar == 3 and posicao_jogador.leste != None:
+            world.verificar_luta(jogador, posicao_jogador.leste)
             bd.set_posicao_jogador(jogador, posicao_jogador.leste)
             return True
         if opt_andar == 4 and posicao_jogador.oeste != None:
+            world.verificar_luta(jogador, posicao_jogador.oeste)
             bd.set_posicao_jogador(jogador, posicao_jogador.oeste)
             return True
 
@@ -349,3 +357,11 @@ def crafitar(jogador, craft):
     bd.adicionar_item_iventario(jogador, instancia_criada)
     return True
 
+
+def morte(jogador):
+    menu.clear()
+    input(f'[i] sua vida chegou a 0')
+    input(f'[i] voce morreu')
+    input(f'[i] clice ENTER para continuar')
+    bd.del_jogador(jogador)
+    os.execl(sys.executable, sys.executable, *sys.argv)
