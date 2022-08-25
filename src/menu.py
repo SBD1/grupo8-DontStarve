@@ -125,18 +125,24 @@ def menu_jogador(jogador):
         clear()
         posicao_jogador = bd.get_posicao_jogador(jogador)
         print(posicao_jogador.descricao)
+        
+        _jogador = bd.get_jogador()
+        print('\n[i] Vida: ' + str(_jogador.vida))
 
         print(_txt_menu_jogador)
         acao = input('[?] ').strip()
 
         if acao == '1':
             player.andar(jogador, posicao_jogador)
+            continue
 
         if acao == '2':
             player.inventario(jogador)
+            continue
 
         if acao == '3':
             player.craft(jogador, posicao_jogador)
+            continue
 
         if acao == '0':
             return False
