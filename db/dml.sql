@@ -1,5 +1,7 @@
 -- mapa
+\c dontstarve;
 INSERT INTO mapa VALUES (DEFAULT, '1997-08-24', 25, 'p');
+
 -- bioma
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.1, 10, 'floresta');
 
