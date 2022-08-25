@@ -1,5 +1,16 @@
 # mock
 # mock jogador
+import psycopg2
+conn = psycopg2.connect(
+    host = "db",
+    port = "5432",
+    database="sbd1",
+    user="sbd1",
+    password="asdfghjkl")
+
+cursor = conn.cursor()
+
+
 jogador = type('', (), {})()
 
 jogador.id = 1
@@ -300,6 +311,7 @@ craft3.id_item_resultado = 1
 
 def get_jogos_salvos():
     # retornar todos os jog adores salvos em array
+    print(cursor.execute("SELECT version()"))
     return ['player1', 'player2']
     return []
 
