@@ -9,4 +9,4 @@ done
 >&2 echo "Postgres is up - executing command"
 exec "$@"
 
-unset $(grep -v '^#' .env | sed -E 's/(.*)=.*/\1/' | xargs)
+
