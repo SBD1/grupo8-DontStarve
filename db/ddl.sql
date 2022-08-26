@@ -37,6 +37,12 @@ CREATE TABLE bioma(
     CONSTRAINT bioma_pk PRIMARY KEY(id)
 );
 
+CREATE TABLE recurso(
+    id_posicao INT NOT NULL,
+    quant_madeira INT,
+    quant_pedra INT,
+    CONSTRAINT id_posicao_recurso_fk FOREIGN KEY(id_posicao) REFERENCES posicao(id),
+)
 
 CREATE TABLE posicao (
     id SERIAL,
@@ -93,6 +99,8 @@ CREATE TABLE mochila(
 CREATE TABLE jogador(
     id SERIAL,
     nome texto,
+    vida INT NOT NULL,
+    temp_corporal INT NOT NULL,
     id_mochila INT,
     id_posicao INT NOT NULL,
     id_roupa_equipada INT , -- Triger and storage.
