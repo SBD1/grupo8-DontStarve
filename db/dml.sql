@@ -53,6 +53,7 @@ INSERT INTO mochila VALUES (1);
 
 -- jogador
 INSERT INTO jogador VALUES (DEFAULT, 'Joao',1, 3,NULL,NULL);
+INSERT INTO jogador VALUES (DEFAULT, 'carlos',1, 3,NULL,NULL);
 
 
 -- mochila_guarda_instancia_de_item

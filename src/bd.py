@@ -4,7 +4,7 @@ import psycopg2
 conn = psycopg2.connect(
     host = "db",
     port = "5432",
-    database="sbd1",
+    database="dontstarve",
     user="sbd1",
     password="asdfghjkl")
 
@@ -339,7 +339,7 @@ monstro2.id_posicao = 0
 
 
 def get_jogador():
-    return jogador
+    return [cursor.execute("SELECT  * FROM jogador")]
 
 
 def del_jogador(jogador):
@@ -351,9 +351,9 @@ def set_vida_jogador(jogador, vida):
 
 def get_jogos_salvos():
     # retornar todos os jog adores salvos em array
-    print(cursor.execute("SELECT version()"))
-    return ['player1', 'player2']
-    return []
+    cursor.execute("SELECT  * FROM jogador")
+    return cursor.fetchall()
+    return
 
 
 def novo_jogador(nome: str):
