@@ -339,15 +339,22 @@ monstro2.id_posicao = 0
 
 
 def get_jogador():
-    return [cursor.execute("SELECT  * FROM jogador")]
+    cursor.execute("SELECT  * FROM jogador")
+    return [cursor.fetchall()]
 
+def get_jogador_id(nome):
+    cursor.execute(f"SELECT  id FROM jogador WHERE nome = {nome}")
+    return cursor.fetchall()
 
 def del_jogador(jogador):
+    cursor.execute(f"DELETE FROM jogador WHERE id = {get_jogador_id(jogador)}")
+    cursor.fetchall()
     return
 
 
 def set_vida_jogador(jogador, vida):
-    jogador.vida = vida
+    cursor.execute(f"UPDATE jogador SET vida = {vida} WHERE id = {get_jogador_id(jogador)};")
+    return cursor.fetchall()
 
 def get_jogos_salvos():
     # retornar todos os jog adores salvos em array
@@ -359,141 +366,107 @@ def get_jogos_salvos():
 def novo_jogador(nome: str):
     # inserir novo jogador no bd, em caso de falha retornar False
     # em caso de sucesso:
-    return nome
+    cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
+    cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
+    id_mochila = cursor.fetchone()[0]
+    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,{nome},100,36,{id_mochila}, 3,NULL,NULL);")
+    return cursor.fetchall()
 
 
 def get_posicao_jogador(nome: str):
     # pegar infos da posicao que o jogador se encontra no banco
-    return get_posicao(jogador.id_posicao)
+    cursor.execute(f"SELECT id_posicao FROM jogador WHERE nome = {nome}")
+    idpos = cursor.fetchone()[0]
+    return get_posicao(idpos)
 
 
 def set_posicao_jogador(nome, posicao):
     # setar posicao do jogador "nome" para "posicao"
-    jogador.id_posicao = posicao
+    cursor.execute(f"UPDATE jogador SET id_posicao = {posicao} WHERE nome = {nome}")
+    return cursor.fetchall()
 
 
 def get_inventario_por_tipo(jogador, tipo):
     # retornar todos as intancias de item associadas a mochila player.mochila no formato[[instancia, item], ...]
-    a = []
-
-    i = 0
-    while True:
-        i+=1
-
-        b = []
-        try:
-            mochila = eval(f'item_mochila{i}')
-            if mochila.id_mochila != 1:
-                continue
-        except:
-            break
-
-        instancia = get_instancia_item_por_id(mochila.id_instancia_item)
-        b.append(instancia)
-
-        if instancia.tipo != tipo:
-            continue
-
-        item = get_item_por_id(instancia.id_item)
-        b.append(item)
-
-        a.append(b)
-
-    return a
+    cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = {get_jogador_id(jogador)}")
+    id_mochila = cursor.fetchone()[0]
+    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila}")
+    return cursor.fetchall()
 
 
 def get_posicao(id_pos):
-
-    # retornar posicao com id == id_pos
-    if id_pos == 0:
-        return pos0
-    if id_pos == 1:
-        return pos1
-    if id_pos == 2:
-        return pos2
-
-    return -1
+    # retornar infos da posicao que o jogador se encontra no banco
+    cursor.execute(f"SELECT * FROM posicao WHERE id = {id_pos}")
+    return cursor.fetchall()
 
 
 def set_pedras(id_pos, pedras):
-    pos = eval("pos" + str(id_pos))
-    pos.pedras = pedras
+    cursor.execute(f"UPDATE posicao SET pedras = {pedras} WHERE id = {id_pos}")
+    return cursor.fetchall()
 
 
 def get_instancia_item_por_id(id_item):
-    if id_item == None:
-        return None
-    return eval(f'instancia_item{id_item}')
+    cursor.execute(f"SELECT * FROM instancia_item WHERE id = {id_item}")
+    return cursor.fetchall()
 
     
 def get_item_por_id(id_item):
-    if id_item == None:
-        return None
-    return eval(f'item{id_item}')
+    cursor.execute(f"SELECT * FROM item WHERE id = {id_item}")
+    return cursor.fetchall()
 
 
 def set_item_equipado(nome_jogador, id_instancia_item):
-    jogador.id_item_equipado = id_instancia_item
+    cursor.execute(f"UPDATE jogador SET id_item_equipado = {id_instancia_item} WHERE if = {get_jogador_id(nome_jogador)}")
+    return cursor.fetchall()
+    
 
 
 def get_item_equipado(nome_jogador):
-    instancia_item_equipado = get_instancia_item_por_id(jogador.id_item_equipado)
-
-    if instancia_item_equipado != None:
-        item_equipado = get_item_por_id(instancia_item_equipado.id_item)
-    else:
-        item_equipado = None
-
-    return [instancia_item_equipado, item_equipado]
+    cursor.execute(f"SELECT id_item_equipado FROM jogador WHERE id = {get_jogador_id(nome_jogador)}")
+    return cursor.fetchall()
 
 
 def set_roupa_equipada(nome_jogador, id_instancia_item):
-    jogador.id_roupa_equipada = id_instancia_item
+    cursor.execute(f"UPDATE jogador SET id_roupa_equipada = {id_instancia_item} WHERE if = {get_jogador_id(nome_jogador)}")
+    return cursor.fetchall()
 
 
 def get_roupa_equipada(nome_jogador):
-    instancia_roupa_equipada = get_instancia_item_por_id(jogador.id_roupa_equipada)
-
-    if instancia_roupa_equipada != None:
-        roupa_equipada = get_item_por_id(instancia_roupa_equipada.id_item)
-    else:
-        roupa_equipada = None
-
-    return [instancia_roupa_equipada, roupa_equipada]
+    cursor.execute(f"SELECT id_roupa_equipada FROM jogador WHERE id = {get_jogador_id(nome_jogador)}")
+    return cursor.fetchone()[0]
 
 
 def add_instancia_item_possicao(id_pos, id_instancia):
     # adicionar linha na tabela instancia_item_posicao, retornar T/F
-    instancia_item_posicao0.id_posicao = id_pos
-    instancia_item_posicao0.id_instancia_item = id_instancia
-    return True
+    cursor.execute(f"INSERT INTO instancia_item_posicao VALUES ({id_pos},{id_instancia})")
+    return cursor.fetchall()
 
 
 def get_instancia_item_possicao(id_pos):
     # retornar todos as instancia_item_posicao que tenha como id_posicao "id_pos"
-    if eval(f'instancia_item_posicao{id_pos}.id_posicao') == None:
-        return []
-    
-    return [eval(f'instancia_item_posicao{id_pos}.id_instancia_item')]
+    cursor.execute(f"SELECT id_instancia_item FROM instancia_item_posicao WHERE id_posicao = {id_pos}")
+    return cursor.fetchall()
 
 
 def del_instancia_item_possicao(id_pos, id_instancia):
     # deletar linha na tabela instancia_item_posicao, retornar T/F
-    instancia_item_posicao0.id_posicao = None
-    instancia_item_posicao0.id_instancia_item = None
-    return True
+    cursor.execute(f"DELETE FROM instancia_item_posicao WHERE id_posicao = {id_pos} AND id_instancia_item = {id_instancia}")
+    return cursor.fetchall()
 
 
 def get_crafts(workbench):
 
     # retornar todos os crafts se 'workbench' == True
     # todos que nao necessitam de workbench se 'workbench' == False
-    
+    cursor.execute(f"SELECT * FROM craft WHERE id = {workbench}")
     if workbench:
         return [craft1, craft2, craft3]
 
     return [craft1, craft2]
 
+def get_mochila_id(nome_jogador):
+    cursor.execute(f"SELECT id_mochila FROM jogador WHERE nome = {nome_jogador}")
+    return cursor.fetchone()[0]
 
 def verificar_inventario(jogador, id_item, quantidade = 1):
     # retornar True se o jogador possuir quantidade do item necessario, False se nao
@@ -501,34 +474,13 @@ def verificar_inventario(jogador, id_item, quantidade = 1):
     # COUNT(cod_servico) AS quantidade
     # FROM tb_ordem_servico
     # WHERE cod_servico = 'A';
-
-    quantidade_inventario = 0
-
-    i = 0
-    while True:
-        i+=1
-
-        try:
-            item = eval(f'item_mochila{i}')
-            if item.id_mochila != 1:
-                continue
-        except:
-            break
-        item = get_instancia_item_por_id(item.id_instancia_item)
-
-        if item.id_item == id_item:
-            quantidade_inventario += 1
-        
-        if quantidade_inventario == quantidade:
-            return item
-        
-    
-    return False
+    cursor.execute(f"SELECT COUNT(id_instancia_item) AS quantidade FROM mochila_guarda_instancia_de_item WHERE id_mochila = {get_mochila_id(jogador)} AND id_instancia_item = {id_item}")
+    return cursor.fetchone()[0] >= quantidade
 
 
-def criar_instancia_item(id_item):
+def criar_instancia_item(id_item,tipo):
     # criar uma nova instancia de item e retornar seu id
-
+    cursor.execute(f"INSERT INTO instancia_item VALUES (DEFAULT,{id_item},'{tipo}')")
     if id_item == 1: # espada
         return 12
     if id_item == 11: # workbench
@@ -539,62 +491,27 @@ def criar_instancia_item(id_item):
 
 def remover_item_iventario(jogador, id_item):
 
-    i = 0
-    while True:
-        i+=1
-
-        try:
-            mochila = eval(f'item_mochila{i}')
-        except:
-            break
-        
-        item = get_instancia_item_por_id(mochila.id_instancia_item)
-
-        if item.id_item == id_item:
-            mochila.id_mochila = 0
-            return
+    id_mochila = get_mochila_id(jogador)
+    cursor.execute(f"DELETE FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item = {id_item}")
+    return cursor.fetchall()
     
 
 def adicionar_item_iventario(jogador, id_instancia_item):
     # adicionar item na mochila do jogador
 
-    mochila = eval(f'item_mochila{id_instancia_item}')
-    mochila.id_mochila = 1
-    return True
+    id_mochila = get_mochila_id(jogador)
+    cursor.execute(f"INSERT INTO mochila_guarda_instancia_de_item VALUES ({id_mochila},{id_instancia_item})")
+    return cursor.fetchall()
 
 
 def get_bioma(id_bioma):
-
-    if id_bioma == 1: 
-        return bioma1
-
-
+    cursor.execute(f"SELECT * FROM bioma WHERE id = {id_bioma}")
+    return cursor.fetchall()
 
 def get_monstros_by_pos(id_pos):
-    i = 0
-    monstros = []
-    while True:
-        i+=1
-
-        try:
-            monstro = eval(f'monstro{i}')
-            if monstro.id_posicao == id_pos:
-                monstros.append(monstro)
-        except:
-            break
-
-    return monstros
+    cursor.execute(f"SELECT * FROM monstro WHERE id_posicao = {id_pos}")
+    return cursor.fetchall()
 
 def del_monstro(id_monstro):
-    foo = eval(f'monstro{id_monstro}')
-    del foo
-
-# def get_posicoes_vizinhas(posicao_jogador):
-#     vizinhos = []
-
-#     vizinhos.append(posicao_jogador.norte) if posicao_jogador.norte != None else vizinhos.append(None)
-#     vizinhos.append(posicao_jogador.sul) if posicao_jogador.sul != None else vizinhos.append(None)
-#     vizinhos.append(posicao_jogador.leste) if posicao_jogador.leste != None else vizinhos.append(None)
-#     vizinhos.append(posicao_jogador.oeste) if posicao_jogador.oeste != None else vizinhos.append(None)
-
-#     return vizinhos
+    cursor.execute(f"DELETE FROM monstro WHERE id = {id_monstro}")
+    return cursor.fetchall()
