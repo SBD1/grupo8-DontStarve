@@ -37,13 +37,6 @@ CREATE TABLE bioma(
     CONSTRAINT bioma_pk PRIMARY KEY(id)
 );
 
-CREATE TABLE recurso(
-    id_posicao INT NOT NULL,
-    quant_madeira INT,
-    quant_pedra INT,
-    CONSTRAINT id_posicao_recurso_fk FOREIGN KEY(id_posicao) REFERENCES posicao(id),
-)
-
 CREATE TABLE posicao (
     id SERIAL,
     id_mapa INT NOT NULL,
@@ -60,6 +53,13 @@ CREATE TABLE posicao (
     CONSTRAINT oeste_posicao_fk FOREIGN KEY(oeste) REFERENCES posicao(id),
     CONSTRAINT bioma_fk FOREIGN KEY(bioma) REFERENCES bioma(id),
     CONSTRAINT id_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
+);
+
+CREATE TABLE recurso (
+    id_posicao INT NOT NULL,
+    quant_madeira INT,
+    quant_pedra INT,
+    CONSTRAINT id_posicao_recurso_fk FOREIGN KEY(id_posicao) REFERENCES posicao(id)
 );
 
 CREATE TABLE instancia_item(
