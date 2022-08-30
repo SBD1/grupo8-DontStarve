@@ -21,3 +21,5 @@ Repositório para desenvolvimento do projeto de Don't Starve, do grupo 9, na dis
 ### [Apresentação 1 - modelagem conceitual e lógica](https://drive.google.com/file/d/1YRKwpkC_KqgHPOBZn5c2oGeQAcFz-kbB/view?usp=sharing)
 #### Diagramas:[DER/DERL](Docs/MER.md)
 
+### [Apresentação 3 - Trigger and Storage](/apresentacoes/Apresentacao3.mp4)
+

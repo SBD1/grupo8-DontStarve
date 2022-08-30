@@ -1,3 +1,4 @@
+-- SQLBook: Code
 CREATE DATABASE dontstarve;
 \c dontstarve;
 
@@ -34,6 +35,7 @@ CREATE TABLE bioma(
     chance_batalha INT NOT NULL,
     delta_temp INT NOT NULL,
     nome texto NOT NULL,
+    nivel INT,
     CONSTRAINT bioma_pk PRIMARY KEY(id)
 );
 
@@ -47,19 +49,12 @@ CREATE TABLE posicao (
     oeste INT,
     descricao descricao,
     CONSTRAINT posicao_pk PRIMARY KEY(id),
-    CONSTRAINT norte_posicao_fk FOREIGN KEY(norte) REFERENCES posicao(id),
-    CONSTRAINT sul_posicao_fk FOREIGN KEY(sul) REFERENCES posicao(id),
-    CONSTRAINT leste_posicao_fk FOREIGN KEY(leste) REFERENCES posicao(id),
-    CONSTRAINT oeste_posicao_fk FOREIGN KEY(oeste) REFERENCES posicao(id),
+    -- CONSTRAINT norte_posicao_fk FOREIGN KEY(norte) REFERENCES posicao(id),
+    -- CONSTRAINT sul_posicao_fk FOREIGN KEY(sul) REFERENCES posicao(id),
+    -- CONSTRAINT leste_posicao_fk FOREIGN KEY(leste) REFERENCES posicao(id),
+    -- CONSTRAINT oeste_posicao_fk FOREIGN KEY(oeste) REFERENCES posicao(id),
     CONSTRAINT bioma_fk FOREIGN KEY(bioma) REFERENCES bioma(id),
     CONSTRAINT id_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
-);
-
-CREATE TABLE recurso (
-    id_posicao INT NOT NULL,
-    quant_madeira INT,
-    quant_pedra INT,
-    CONSTRAINT id_posicao_recurso_fk FOREIGN KEY(id_posicao) REFERENCES posicao(id)
 );
 
 CREATE TABLE instancia_item(
@@ -149,6 +144,7 @@ CREATE TABLE ingrediente(
     nome texto NOT NULL,
     funcao texto NOT NULL,
     descricao descricao NOT NULL,
+    quantidade INT,
     CONSTRAINT ingrediente_pk PRIMARY KEY(id),
     CONSTRAINT nome_ingrediente_sk UNIQUE(nome)
 );
@@ -175,3 +171,32 @@ CREATE TABLE craft(
     CONSTRAINT id_item2_fk FOREIGN KEY(id_item2) REFERENCES instancia_item(id),
     CONSTRAINT id_item3_fk FOREIGN KEY(id_item3) REFERENCES instancia_item(id)
 );
+
+-- Trigger and Storage section.
+
+CREATE OR REPLACE FUNCTION walk_monster() RETURNS trigger as $walk_monster$
+BEGIN
+    -- UPDATE monstro SET id_posicao=(SELECT floor(random()*(153-1+1))+1);
+    UPDATE monstro SET id_posicao=(SELECT floor(random()*(3-(-2))-2) + OLD.id_posicao ) WHERE id=(SELECT floor(random()*(16-1+1))+1);
+    RETURN new;
+END;
+$walk_monster$ LANGUAGE plpgsql;
+
+CREATE TRIGGER walk_monster_trigger
+    AFTER UPDATE ON jogador FOR EACH ROW EXECUTE PROCEDURE walk_monster();
+
+----------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION insert_itens() RETURNS trigger as $insert_itens$
+BEGIN
+    INSERT INTO instancia_item VALUES (DEFAULT, 5, 'f');
+    INSERT INTO instancia_item_posicao VALUES(135,(SELECT id FROM instancia_item ORDER BY id DESC LIMIT 1));
+    INSERT INTO instancia_item VALUES (DEFAULT, 2, 'a');
+    INSERT INTO instancia_item_posicao VALUES(151,(SELECT id FROM instancia_item ORDER BY id DESC LIMIT 1));
+    RETURN new;
+END;
+$insert_itens$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insert_itens_trigger
+    AFTER INSERT ON jogador EXECUTE PROCEDURE insert_itens();
+

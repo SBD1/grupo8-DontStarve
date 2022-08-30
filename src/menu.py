@@ -124,10 +124,10 @@ def menu_jogador(jogador):
     while True:
         clear()
         posicao_jogador = bd.get_posicao_jogador(jogador)
-        print(posicao_jogador.descricao)
+        print(posicao_jogador[-1])
         
         _jogador = bd.get_jogador()
-        print('\n[i] Vida: ' + str(_jogador.vida))
+        print('\n[i] Vida: ' + str(_jogador[1]))
 
         print(_txt_menu_jogador)
         acao = input('[?] ').strip()
