@@ -113,7 +113,7 @@ def inventario_armas(jogador, inventario):
 
         i = 1
         for item in inventario:
-            print(f'[{i}] {item[1].nome}')
+            print(f'[{i}] {item.nome}')
             i+=1
         print('[0] Voltar')
         opt_arma = input('[?] ').strip()
@@ -133,14 +133,14 @@ def inventario_armas(jogador, inventario):
             return True
 
         menu.clear()
-        print(f"[i] Nome:      {inventario[opt_arma-1][1].nome}")
-        print(f"[i] Descricao: {inventario[opt_arma-1][1].descricao}")
-        print(f"[i] Dano:      {inventario[opt_arma-1][1].dano}")
+        print(f"[i] Nome:      {inventario[opt_arma-1].nome}")
+        print(f"[i] Descricao: {inventario[opt_arma-1].descricao}")
+        print(f"[i] Dano:      {inventario[opt_arma-1].dano}")
 
-        print(f"\n[?] Equipar {inventario[opt_arma-1][1].nome}? (S/N)")
+        print(f"\n[?] Equipar {inventario[opt_arma-1].nome}? (S/N)")
 
         if(input('[?]').lower() == 's'):
-            bd.set_item_equipado(jogador, inventario[opt_arma-1][0].id)
+            bd.set_item_equipado(jogador, inventario[opt_arma-1].instancia)
         else:
             continue
 
@@ -154,7 +154,7 @@ def inventario_roupas(jogador, inventario):
 
         i = 1
         for item in inventario:
-            print(f'[{i}] {item[1].nome}')
+            print(f'[{i}] {item.nome}')
             i+=1
         print('[0] Voltar')
         opt_roupa = input('[?] ').strip()
@@ -174,15 +174,15 @@ def inventario_roupas(jogador, inventario):
             return True
 
         menu.clear()
-        print(f"[i] Nome:             {inventario[opt_roupa-1][1].nome}")
-        print(f"[i] Descricao:        {inventario[opt_roupa-1][1].descricao}")
-        print(f"[i] Protecao Termica: {inventario[opt_roupa-1][1].protecao_termica}")
-        print(f"[i] Protecao Fisica:  {inventario[opt_roupa-1][1].protecao_termica}")
+        print(f"[i] Nome:             {inventario[opt_roupa-1].nome}")
+        print(f"[i] Descricao:        {inventario[opt_roupa-1].descricao}")
+        print(f"[i] Protecao Termica: {inventario[opt_roupa-1].protecao_termica}")
+        print(f"[i] Protecao Fisica:  {inventario[opt_roupa-1].protecao_termica}")
 
-        print(f"\n[?] Equipar {inventario[opt_roupa-1][1].nome}? (S/N)")
+        print(f"\n[?] Equipar {inventario[opt_roupa-1].nome}? (S/N)")
 
         if(input('[?] ').lower() == 's'):
-            bd.set_roupa_equipada(jogador, inventario[opt_roupa-1][0].id)
+            bd.set_roupa_equipada(jogador, inventario[opt_roupa-1].instancia)
         else:
             continue
 
@@ -193,7 +193,7 @@ def inventario_ferramentas(jogador, inventario):
 
         i = 1
         for item in inventario:
-            print(f'[{i}] {item[1].nome}')
+            print(f'[{i}] {item.nome}')
             i+=1
         print('[0] Voltar')
         opt_ferramenta = input('[?] ').strip()
@@ -213,13 +213,13 @@ def inventario_ferramentas(jogador, inventario):
             return True
 
         menu.clear()
-        print(f"[i] Nome:             {inventario[opt_ferramenta-1][1].nome}")
-        print(f"[i] Descricao:        {inventario[opt_ferramenta-1][1].descricao}")
+        print(f"[i] Nome:             {inventario[opt_ferramenta-1].nome}")
+        print(f"[i] Descricao:        {inventario[opt_ferramenta-1].descricao}")
 
-        print(f"\n[?] Usar {inventario[opt_ferramenta-1][1].nome}? (S/N)")
+        print(f"\n[?] Usar {inventario[opt_ferramenta-1].nome}? (S/N)")
 
         if(input('[?] ').lower() == 's'):
-            funcao = inventario[opt_ferramenta-1][1].funcao
+            funcao = inventario[opt_ferramenta-1].funcao
             try:
                 eval('world.'+ funcao)
                 return
@@ -236,7 +236,7 @@ def inventario_ingredientes(jogador, inventario):
 
         i = 1
         for item in inventario:
-            print(f'[{i}] {item[1].nome}')
+            print(f'[{i}] {item.nome}')
             i+=1
         print('[0] Voltar')
         opt_ingrediente = input('[?] ').strip()
@@ -256,10 +256,10 @@ def inventario_ingredientes(jogador, inventario):
             return True
         
         menu.clear()
-        print(f"[i] Nome:             {inventario[opt_ingrediente-1][1].nome}")
-        print(f"[i] Descricao:        {inventario[opt_ingrediente-1][1].descricao}")
+        print(f"[i] Nome:             {inventario[opt_ingrediente-1].nome}")
+        print(f"[i] Descricao:        {inventario[opt_ingrediente-1].descricao}")
 
-        print(f"\n[?] Usar {inventario[opt_ingrediente-1][1].nome}? (S/N)")
+        print(f"\n[?] Usar {inventario[opt_ingrediente-1].nome}? (S/N)")
 
         if(input('[?] ').lower() == 's'):
             funcao = inventario[opt_ingrediente-1][1].funcao
@@ -281,10 +281,9 @@ def craft(jogador, posicao):
 
         if itens_na_pos:
             for item_na_pos in itens_na_pos:
-                if item_na_pos.id_item == 11: # workbench:
+                if item_na_pos == 11: # workbench:
                     lista_crafts = bd.get_crafts(True)
-                else: 
-                    lista_crafts = bd.get_crafts(False)
+                    break
         else:
             lista_crafts = bd.get_crafts(False)
 

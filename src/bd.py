@@ -338,13 +338,21 @@ monstro2.id_posicao = 0
 # end mock
 
 
-def get_jogador():
+def get_jogadores():
     cursor.execute("SELECT  * FROM jogador")
     return cursor.fetchall()
 
-def get_jogador_id(nome):
-    cursor.execute(f"SELECT  id FROM jogador WHERE nome = '{nome[1]}'")
-    return cursor.fetchall()
+def get_jogador_id(id):
+    cursor.execute(f"SELECT * FROM jogador WHERE id = '{id}'")
+    jogador = type('', (), {})()
+    jogador.id = 1
+    jogador.nome = 'player1'
+    jogador.vida = 100
+    jogador.id_mochila = 1
+    jogador.id_posicao = 0
+    jogador.id_roupa_equipada = None
+    jogador.id_item_equipado = None
+    return jogador
 
 def del_jogador(jogador):
     cursor.execute(f"DELETE FROM jogador WHERE id = {get_jogador_id(jogador)}")
@@ -359,7 +367,6 @@ def get_jogos_salvos():
     # retornar todos os jog adores salvos em array
     cursor.execute("SELECT  * FROM jogador")
     return cursor.fetchall()
-    return
 
 
 def novo_jogador(nome: str):
@@ -369,12 +376,13 @@ def novo_jogador(nome: str):
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()[0]
     cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila}, 3,NULL,NULL);")
-    return True
+    id = cursor.lastrowid
+    return get_jogador_id(id)
 
 
-def get_posicao_jogador(nome: str):
+def get_posicao_jogador(id):
     # pegar infos da posicao que o jogador se encontra no banco
-    cursor.execute(f"SELECT id_posicao FROM jogador WHERE nome ='{nome[1]}'")
+    cursor.execute(f"SELECT id_posicao FROM jogador WHERE id ='{id}'")
     idpos = cursor.fetchone()[0]
     return get_posicao(idpos)
 
@@ -385,14 +393,111 @@ def set_posicao_jogador(nome, posicao):
     return cursor.fetchall()
 
 
-def get_inventario_por_tipo(jogador, tipo):
+def get_inventario_por_tipo(id, tipo):
     # retornar todos as intancias de item associadas a mochila player.mochila no formato[[instancia, item], ...]
-    cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = {get_jogador_id(jogador)}")
+    cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = {id}")
     id_mochila = cursor.fetchone()[0]
-    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila}")
-    return cursor.fetchall()
+    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item IN (SELECT id FROM instancia_item WHERE tipo = {tipo})")
+    instancias = cursor.fetchall()
+    result = []
+    for i in instancias:
+        cursor.execute(f"SELECT id_item FROM instancia_item WHERE id = {i[0]}")
+        id_item = cursor.fetchone()[0]
+        if(tipo == 'a'):
+            cursor.execute(f"SELECT * FROM arma WHERE id = {id_item}")
+            aux = cursor.fetchone()
+            arma = type('', (), {})()
+            arma.id = aux[0]
+            arma.nome = aux[1]
+            arma.dano = aux[2]
+            arma.descricao = aux[3]
+            arma.instancia = i
+            result.append(arma)
+        if(tipo == 'f'):
+            cursor.execute(f"SELECT * FROM ferramenta WHERE id = {id_item}")
+            aux = cursor.fetchone()
+            ferramenta = type('', (), {})()
+            ferramenta.id = aux[0]
+            ferramenta.nome = aux[1]
+            ferramenta.funcao = aux[2]
+            ferramenta.descricao = aux[3]
+            ferramenta.instancia = i
+            result.append(ferramenta)
+        if(tipo == 'r'):
+            cursor.execute(f"SELECT * FROM roupa WHERE id = {id_item}")
+            aux = cursor.fetchone()
+            roupa = type('', (), {})()
+            roupa.id = aux[0]
+            roupa.nome = aux[1]
+            roupa.protecao_termica = aux[2]
+            roupa.protecao_fisica = aux[3]
+            roupa.descricao = aux[4]
+            roupa.instancia = i
+            result.append(roupa)
+        if(tipo == 'i'):
+            cursor.execute(f"SELECT * FROM ingrediente WHERE id = {id_item}")
+            aux = cursor.fetchone()
+            ingrediente = type('', (), {})()
+            ingrediente.id = aux[0]
+            ingrediente.nome = aux[1]
+            ingrediente.funcao = aux[2]
+            ingrediente.descricao = aux[3]
+            ingrediente.instancia = i
+            result.append(ingrediente)
+    return result
 
 
+def get_item_por_id_instancia(id_instancia):
+    # retornar todos as intancias de item associadas a mochila player.mochila no formato[[instancia, item], ...]
+    cursor.execute(f"SELECT * FROM instancia_item WHERE id = {id_instancia}")
+    instancia = cursor.fetchone()
+    id_item = instancia[1]
+    tipo = instancia[2]
+    
+    if(tipo == 'a'):
+        cursor.execute(f"SELECT * FROM arma WHERE id = {id_item}")
+        aux = cursor.fetchone()
+        arma = type('', (), {})()
+        arma.id = aux[0]
+        arma.nome = aux[1]
+        arma.dano = aux[2]
+        arma.descricao = aux[3]
+        arma.instancia = id_instancia
+        return (arma)
+    if(tipo == 'f'):
+        cursor.execute(f"SELECT * FROM ferramenta WHERE id = {id_item}")
+        aux = cursor.fetchone()
+        ferramenta = type('', (), {})()
+        ferramenta.id = aux[0]
+        ferramenta.nome = aux[1]
+        ferramenta.funcao = aux[2]
+        ferramenta.descricao = aux[3]
+        ferramenta.instancia = id_instancia
+        return (ferramenta)
+    if(tipo == 'r'):
+        cursor.execute(f"SELECT * FROM roupa WHERE id = {id_item}")
+        aux = cursor.fetchone()
+        roupa = type('', (), {})()
+        roupa.id = aux[0]
+        roupa.nome = aux[1]
+        roupa.protecao_termica = aux[2]
+        roupa.protecao_fisica = aux[3]
+        roupa.descricao = aux[4]
+        roupa.instancia = id_instancia
+        return (roupa)
+    if(tipo == 'i'):
+        cursor.execute(f"SELECT * FROM ingrediente WHERE id = {id_item}")
+        aux = cursor.fetchone()
+        ingrediente = type('', (), {})()
+        ingrediente.id = aux[0]
+        ingrediente.nome = aux[1]
+        ingrediente.funcao = aux[2]
+        ingrediente.descricao = aux[3]
+        ingrediente.instancia = id_instancia
+        return (ingrediente)
+
+
+#TODO implementar mock
 def get_posicao(id_pos):
     # retornar infos da posicao que o jogador se encontra no banco
     cursor.execute(f"SELECT * FROM posicao WHERE id = {id_pos}")
@@ -414,24 +519,24 @@ def get_item_por_id(id_item):
     return cursor.fetchall()
 
 
-def set_item_equipado(nome_jogador, id_instancia_item):
-    cursor.execute(f"UPDATE jogador SET id_item_equipado = {id_instancia_item} WHERE if = {get_jogador_id(nome_jogador)}")
+def set_item_equipado(id_jogador, id_instancia_item):
+    cursor.execute(f"UPDATE jogador SET id_item_equipado = {id_instancia_item} WHERE id = {(id_jogador)}")
     return cursor.fetchall()
     
 
 
-def get_item_equipado(nome_jogador):
-    cursor.execute(f"SELECT id_item_equipado FROM jogador WHERE id = {get_jogador_id(nome_jogador)}")
+def get_item_equipado(id_jogado):
+    cursor.execute(f"SELECT id_item_equipado FROM jogador WHERE id = {(id_jogado)}")
     return cursor.fetchall()
 
 
-def set_roupa_equipada(nome_jogador, id_instancia_item):
-    cursor.execute(f"UPDATE jogador SET id_roupa_equipada = {id_instancia_item} WHERE if = {get_jogador_id(nome_jogador)}")
+def set_roupa_equipada(id_jogador, id_instancia_item):
+    cursor.execute(f"UPDATE jogador SET id_roupa_equipada = {id_instancia_item} WHERE id = {(id_jogador)}")
     return cursor.fetchall()
 
 
-def get_roupa_equipada(nome_jogador):
-    cursor.execute(f"SELECT id_roupa_equipada FROM jogador WHERE id = {get_jogador_id(nome_jogador)}")
+def get_roupa_equipada(id_jogador):
+    cursor.execute(f"SELECT id_roupa_equipada FROM jogador WHERE id = {(id_jogador)}")
     return cursor.fetchone()[0]
 
 
@@ -444,6 +549,10 @@ def add_instancia_item_possicao(id_pos, id_instancia):
 def get_instancia_item_posicao(id_pos):
     # retornar todos as instancia_item_posicao que tenha como id_posicao "id_pos"
     cursor.execute(f"SELECT id_instancia_item FROM instancia_item_posicao WHERE id_posicao = {id_pos}")
+    aux = cursor.fetchall()
+    result = []
+    for i in aux:
+        result.append(get_instancia_item_por_id(i))
     return cursor.fetchall()
 
 
@@ -456,13 +565,12 @@ def del_instancia_item_posicao(id_pos, id_instancia):
 def get_crafts(workbench):
 
     # retornar todos os crafts se 'workbench' == True
-    # todos que nao necessitam de workbench se 'workbench' == False
-    cursor.execute(f"SELECT * FROM craft WHERE id = {workbench}")
     if workbench:
-        return [craft1, craft2, craft3]
+        return cursor.execute(f"SELECT * FROM craft").fetchall()
 
-    return [craft1, craft2]
+    return cursor.execute(f"SELECT * FROM craft WHERE necessita_workbench = 'false'").fetchall()
 
+    #TODO find via id player
 def get_mochila_id(nome_jogador):
     cursor.execute(f"SELECT id_mochila FROM jogador WHERE nome = '{nome_jogador[1]}'")
     return cursor.fetchone()[0]
@@ -477,15 +585,11 @@ def verificar_inventario(jogador, id_item, quantidade = 1):
     return cursor.fetchone()[0] >= quantidade
 
 
+    #TODO return id instancia item
 def criar_instancia_item(id_item,tipo):
     # criar uma nova instancia de item e retornar seu id
     cursor.execute(f"INSERT INTO instancia_item VALUES (DEFAULT,{id_item},'{tipo}')")
-    if id_item == 1: # espada
-        return 12
-    if id_item == 11: # workbench
-        return 11
-    if id_item == 10: # corda
-        return 10
+    return cursor.fetchall()
 
 
 def remover_item_iventario(jogador, id_item):
@@ -497,7 +601,6 @@ def remover_item_iventario(jogador, id_item):
 
 def adicionar_item_iventario(jogador, id_instancia_item):
     # adicionar item na mochila do jogador
-
     id_mochila = get_mochila_id(jogador)
     cursor.execute(f"INSERT INTO mochila_guarda_instancia_de_item VALUES ({id_mochila},{id_instancia_item})")
     return cursor.fetchall()
@@ -505,12 +608,33 @@ def adicionar_item_iventario(jogador, id_instancia_item):
 
 def get_bioma(id_bioma):
     cursor.execute(f"SELECT * FROM bioma WHERE id = {id_bioma}")
-    return cursor.fetchall()
+    aux = cursor.fetchall()
+    bioma = type('', (), {})()
+    bioma.id = aux[0]
+    bioma.chance_batalha = aux[1]
+    bioma.delta_temp = aux[2]
+    bioma.nome = aux[3]
+    bioma.nivel = aux[4]
+    return bioma
 
+#TODO return all monstros da pos
 def get_monstros_by_pos(id_pos):
     cursor.execute(f"SELECT * FROM monstro WHERE id_posicao = {id_pos}")
-    return cursor.fetchall()
+    aux = cursor.fetchall()
+    monstro = type('', (), {})()
+    monstro.id = aux[0]
+    monstro.nome = aux[1]
+    monstro.dano = aux[2]
+    monstro.descricao = aux[3]
+    monstro.vida = aux[4]
+    monstro.isca = aux[5]
+    monstro.id_posicao = aux[6]
+    return monstro
+
 
 def del_monstro(id_monstro):
-    cursor.execute(f"DELETE FROM monstro WHERE id = {id_monstro}")
-    return cursor.fetchall()
+    try:
+        cursor.execute(f"DELETE FROM monstro WHERE id = {id_monstro}")
+        return True
+    except:
+        return False
