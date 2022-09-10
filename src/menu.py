@@ -107,7 +107,9 @@ def menu_novo_jogo():
             print('[-] Nenhum nome inserido, jogador nao criado')
             input("[i] precione enter para continuar")
             return -1
-        jogador = bd.novo_jogador(nome_jogador) 
+            
+        jogador = bd.novo_jogador(nome_jogador)
+        
         if jogador == -1:
             print('[-] Error ao criar novo peronagem. Tente novamente\n')
             input("[i] precione enter para continuar")

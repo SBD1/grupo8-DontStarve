@@ -3,7 +3,7 @@
 from turtle import position
 import psycopg2
 conn = psycopg2.connect(
-    host = "0.0.0.0",
+    host = "db",
     port = "5432",
     database="dontstarve",
     user="sbd1",
@@ -49,7 +49,6 @@ def novo_jogador(nome: str):
     cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()
-    print("id_mochila", id_mochila[0])
     cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 3,NULL,NULL);")
     id = cursor.lastrowid
     return get_jogador_id(id)
