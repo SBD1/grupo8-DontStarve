@@ -22,9 +22,9 @@ def pegar_pedra(jogador, nivel):
     return 
 
 def colocar_na_pos(jogador, id_item):
-    instancia_item = bd.verificar_inventario(jogador, id_item)
-    bd.add_instancia_item_possicao(0, instancia_item)
-    bd.remover_item_iventario(jogador, instancia_item.id_item)
+    instancia_item = bd.verificar_inventario(jogador.id, id_item)
+    bd.add_instancia_item_possicao(jogador.pos, instancia_item)
+    bd.remover_item_iventario(jogador.id, instancia_item.id_item)
 
 
 def verificar_luta(jogador, id_pos):
@@ -45,8 +45,8 @@ def verificar_luta(jogador, id_pos):
 
 
 
-def luta(jogador, monstro):
-    jogador = bd.get_jogador()
+def luta(player, monstro):
+    jogador = bd.get_jogador(player.id)
 
     menu.clear()
     print(f'[i] um {monstro.nome} selvagem apareceu!')
@@ -61,7 +61,7 @@ def luta(jogador, monstro):
     menu.clear()
     print(f'[i] voce levou {monstro.dano*2} de dano, mas matou o monstro')
     input("[i] precione ENTER para continuar")
-    bd.set_vida_jogador(jogador, vida_jogador)
+    bd.set_vida_jogador(jogador.id, vida_jogador)
     bd.del_monstro(monstro.id)
 
 

@@ -56,11 +56,10 @@ def menu_init():
 def menu_carregar_jogo():
     jogos_salvos = []
     opt_carregar = -1
-    index = 0
     clear()
 
     try:
-        jogos_salvos = bd.get_jogos_salvos()
+        jogos_salvos = bd.get_jogadores()
     except:
         print('\n[-] Nao foi possivel carregar lista de jogos salvos')
         input("[i] precione enter para continuar")
@@ -68,8 +67,7 @@ def menu_carregar_jogo():
 
     if jogos_salvos:
         for jogador in jogos_salvos:
-            index += 1
-            print(f'[{index}] {jogador}')
+            print(f'[{jogador[0]}] {jogador[1]}')
         print(f'\n[0] Cancelar')
 
     else:
@@ -90,11 +88,11 @@ def menu_carregar_jogo():
         if opt_carregar == 0:
             return -1 
         
-        if opt_carregar <= index:
+        if  jogos_salvos.__contains__(jogos_salvos[opt_carregar-1]):
             clear()
             print('[+] Carregango jogo...')
             input("[i] precione enter para continuar")
-            return jogos_salvos[index-2]
+            return bd.get_jogador_id(opt_carregar)
         
         print(_txt_otp_invalida)
         
@@ -109,25 +107,24 @@ def menu_novo_jogo():
             print('[-] Nenhum nome inserido, jogador nao criado')
             input("[i] precione enter para continuar")
             return -1
-
-        if bd.novo_jogador(nome_jogador) == -1:
+        jogador = bd.novo_jogador(nome_jogador) 
+        if jogador == -1:
             print('[-] Error ao criar novo peronagem. Tente novamente\n')
             input("[i] precione enter para continuar")
             return -1
 
         print('[+] Carregango jogo...')
         input("[i] precione enter para continuar")
-        return nome_jogador
+        return jogador
 
 def menu_jogador(jogador):
 
     while True:
         clear()
-        posicao_jogador = bd.get_posicao_jogador(jogador)
-        print(posicao_jogador[-1])
+        posicao_jogador = bd.get_posicao_jogador(jogador.id)
+        print(posicao_jogador.descricao)
         
-        _jogador = bd.get_jogador()
-        print('\n[i] Vida: ' + str(_jogador[1]))
+        print('\n[i] Vida: ' + str(jogador.vida))
 
         print(_txt_menu_jogador)
         acao = input('[?] ').strip()

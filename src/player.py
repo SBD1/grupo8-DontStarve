@@ -31,19 +31,19 @@ def andar(jogador, posicao_jogador):
 
         if opt_andar == 1 and posicao_jogador.norte != None:
             world.verificar_luta(jogador, posicao_jogador.norte)
-            bd.set_posicao_jogador(jogador, posicao_jogador.norte)
+            bd.set_posicao_jogador(jogador.id, posicao_jogador.norte)
             return True
         if opt_andar == 2 and posicao_jogador.sul != None:
             world.verificar_luta(jogador, posicao_jogador.sul)
-            bd.set_posicao_jogador(jogador, posicao_jogador.sul)
+            bd.set_posicao_jogador(jogador.id, posicao_jogador.sul)
             return True
         if opt_andar == 3 and posicao_jogador.leste != None:
             world.verificar_luta(jogador, posicao_jogador.leste)
-            bd.set_posicao_jogador(jogador, posicao_jogador.leste)
+            bd.set_posicao_jogador(jogador.id, posicao_jogador.leste)
             return True
         if opt_andar == 4 and posicao_jogador.oeste != None:
             world.verificar_luta(jogador, posicao_jogador.oeste)
-            bd.set_posicao_jogador(jogador, posicao_jogador.oeste)
+            bd.set_posicao_jogador(jogador.id, posicao_jogador.oeste)
             return True
 
         if opt_andar == 0:
@@ -55,11 +55,11 @@ def andar(jogador, posicao_jogador):
 def inventario(jogador):
     menu.clear()
 
-    item_equipado = bd.get_item_equipado(jogador)
+    item_equipado = bd.get_item_equipado(jogador.id)
     if item_equipado[1]:
         print(f'[i] Item equipado:  {item_equipado[1].nome}')
 
-    roupa_equipada = bd.get_roupa_equipada(jogador)
+    roupa_equipada = bd.get_roupa_equipada(jogador.id)
     if roupa_equipada[1]:
         print(f'[i] Roupa equipado: {roupa_equipada[1].nome}')
 
@@ -80,22 +80,22 @@ def inventario(jogador):
             continue
 
         if opt_inventario == 1:
-            inventario = bd.get_inventario_por_tipo(jogador, 'a')
+            inventario = bd.get_inventario_por_tipo(jogador.id, 'a')
             inventario_armas(jogador, inventario)
             return True
 
         if opt_inventario == 2:
-            inventario = bd.get_inventario_por_tipo(jogador, 'r')
+            inventario = bd.get_inventario_por_tipo(jogador.id, 'r')
             inventario_roupas(jogador, inventario)
             return True
             
         if opt_inventario == 3:
-            inventario = bd.get_inventario_por_tipo(jogador, 'f')
+            inventario = bd.get_inventario_por_tipo(jogador.id, 'f')
             inventario_ferramentas(jogador, inventario)
             return True
             
         if opt_inventario == 4:
-            inventario = bd.get_inventario_por_tipo(jogador, 'i')
+            inventario = bd.get_inventario_por_tipo(jogador.id, 'i')
             inventario_ingredientes(jogador, inventario)
             return True
             
@@ -140,7 +140,7 @@ def inventario_armas(jogador, inventario):
         print(f"\n[?] Equipar {inventario[opt_arma-1].nome}? (S/N)")
 
         if(input('[?]').lower() == 's'):
-            bd.set_item_equipado(jogador, inventario[opt_arma-1].instancia)
+            bd.set_item_equipado(jogador.id, inventario[opt_arma-1].instancia)
         else:
             continue
 
@@ -182,7 +182,7 @@ def inventario_roupas(jogador, inventario):
         print(f"\n[?] Equipar {inventario[opt_roupa-1].nome}? (S/N)")
 
         if(input('[?] ').lower() == 's'):
-            bd.set_roupa_equipada(jogador, inventario[opt_roupa-1].instancia)
+            bd.set_roupa_equipada(jogador.id, inventario[opt_roupa-1].instancia)
         else:
             continue
 
@@ -322,38 +322,38 @@ def craft(jogador, posicao):
 def crafitar(jogador, craft):
 
     if craft.id_item1:
-        if not bd.verificar_inventario(jogador, craft.id_item1, craft.quant_item1):
+        if not bd.verificar_inventario(jogador.id, craft.id_item1, craft.quant_item1):
             print('[-] Voce nao possui todos os ingredientes necessarios')
             input('[i] precione ENTER para continuar')
             return False
 
     if craft.id_item2:
-        if not bd.verificar_inventario(jogador, craft.id_item2, craft.quant_item2):
+        if not bd.verificar_inventario(jogador.id, craft.id_item2, craft.quant_item2):
             print('[-] Voce nao possui todos os ingredientes necessarios')
             input('[i] precione ENTER para continuar')
             return False
     
     if craft.id_item3:
-        if not bd.verificar_inventario(jogador, craft.id_item3, craft.quant_item3):
+        if not bd.verificar_inventario(jogador.id, craft.id_item3, craft.quant_item3):
             print('[-] Voce nao possui todos os ingredientes necessarios')
             input('[i] precione ENTER para continuar')
             return False
 
     if craft.id_item1:
         for i in range(craft.quant_item1):
-            bd.remover_item_iventario(jogador, craft.id_item1)
+            bd.remover_item_iventario(jogador.id, craft.id_item1)
 
     if craft.id_item2:
         for i in range(craft.quant_item2):
-            bd.remover_item_iventario(jogador, craft.id_item2)
+            bd.remover_item_iventario(jogador.id, craft.id_item2)
 
     if craft.id_item3:
         for i in range(craft.quant_item3):
-            bd.remover_item_iventario(jogador, craft.id_item3)
+            bd.remover_item_iventario(jogador.id, craft.id_item3)
     
     instancia_criada = bd.criar_instancia_item(craft.id_item_resultado)
 
-    bd.adicionar_item_iventario(jogador, instancia_criada)
+    bd.adicionar_item_iventario(jogador.id, instancia_criada)
     return True
 
 
@@ -362,5 +362,5 @@ def morte(jogador):
     input(f'[i] sua vida chegou a 0')
     input(f'[i] voce morreu')
     input(f'[i] clice ENTER para continuar')
-    bd.del_jogador(jogador)
+    bd.del_jogador(jogador.id)
     os.execl(sys.executable, sys.executable, *sys.argv)
