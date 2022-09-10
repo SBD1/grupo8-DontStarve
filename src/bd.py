@@ -3,7 +3,7 @@
 from turtle import position
 import psycopg2
 conn = psycopg2.connect(
-    host = "0.0.0.0",
+    host = "db",
     port = "5432",
     database="dontstarve",
     user="sbd1",
@@ -46,12 +46,16 @@ def set_vida_jogador(jogador, vida):
 def novo_jogador(nome: str):
     # inserir novo jogador no bd, em caso de falha retornar False
     # em caso de sucesso:
-    cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
-    cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
-    id_mochila = cursor.fetchone()
-    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila}, 3,NULL,NULL);")
-    id = cursor.lastrowid
-    return get_jogador_id(id)
+    try:
+        cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
+        cursor.execute(f"SELECT id FROM mochila ORDER BY id DESC LIMIT 1;")
+        id_mochila = cursor.fetchone()[0]
+        cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila}, 3,NULL,NULL);")
+        cursor.execute(f"SELECT id FROM jogador ORDER BY id DESC LIMIT 1;")
+        id_jogador = cursor.fetchone()[0]
+        return get_jogador_id(id_jogador)
+    except:
+        return -1
 
 
 def get_posicao_jogador (id):
