@@ -9,6 +9,8 @@ services:
     volumes: 
      - .:/app
     restart: always
+    depends_on:
+      - db
     links:
       - "db:database"
 

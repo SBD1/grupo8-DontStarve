@@ -37,11 +37,11 @@ def del_jogador(id):
             cursor.execute(f"DELETE FROM jogador WHERE id = {get_jogador_id(id)}")
         except:
             return False
-    return cursor.fetchall()
+    return True
 
 def set_vida_jogador(jogador, vida):
     cursor.execute(f"UPDATE jogador SET vida = {vida} WHERE id = {jogador.id};")
-    return cursor.fetchall()
+    return True
 
 def novo_jogador(nome: str):
     # inserir novo jogador no bd, em caso de falha retornar False
@@ -49,7 +49,8 @@ def novo_jogador(nome: str):
     cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()
-    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila}, 3,NULL,NULL);")
+    print("id_mochila", id_mochila[0])
+    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 3,NULL,NULL);")
     id = cursor.lastrowid
     return get_jogador_id(id)
 
@@ -64,7 +65,7 @@ def get_posicao_jogador (id):
 def set_posicao_jogador (id, posicao):
     # setar posicao do jogador "nome" para "posicao"
     cursor.execute(f"UPDATE jogador SET id_posicao = {posicao} WHERE id = '{id}'")
-    return cursor.fetchone()
+    return True
 
 
 def get_inventario_por_tipo (id, tipo):
