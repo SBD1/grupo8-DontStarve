@@ -1,22 +1,23 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  dontstarve:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    image: sbd1/dontstarve
-    volumes: 
-     - .:/app
-    restart: always
-    depends_on:
-      - db
-    links:
-      - "db:database"
+    dontstarve:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: sbd1/dontstarve
+        volumes:
+            - .:/app
+        restart: always
+        depends_on:
+            - db
+        links:
+            - "db:database"
 
   db:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
+      - ./basededados:/var/lib/postgresql/data
     image: postgres
     restart: always
     environment:

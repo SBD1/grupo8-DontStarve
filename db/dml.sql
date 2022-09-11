@@ -14,9 +14,11 @@ INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.6, -
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.0, 0, 'Ponte');
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 1.0, 0, 'Rio');
 
--- posicaoesINSERT INTO posicao VALUES (1,1, 3, NULL, 10, 2, 0, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
-INSERT INTO posicao VALUES (2,1, 3, NULL, 11, 3, 1, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
-INSERT INTO posicao VALUES (3,1, 3, NULL, 12, 4, 2, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
+-- posicaoes
+INSERT INTO posicao VALUES (1,1, 3, NULL, 2, 3, NULL, '1111111');
+INSERT INTO posicao VALUES (2,1, 3, 1, NULL, NULL, NULL,'2222222');
+INSERT INTO posicao VALUES (3,1, 3, NULL, NULL, NULL, 1, '3333333');
+
 INSERT INTO posicao VALUES (4,1, 3, NULL, 13, 5, 3, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
 INSERT INTO posicao VALUES (5,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui');
 INSERT INTO posicao VALUES (6,1, 4, NULL, 15, 7, 5, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
@@ -218,6 +220,12 @@ INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
 -- (Pantano)
 --( nome,dano,descricao,vida,isca,posicao)
 
+
+INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo2',2,'sapo2',10,1,2);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo3',2,'sapo3',10,1,3);
+
 INSERT INTO monstro VALUES (DEFAULT,'Sapo',2,'Sapo está irritado com sua presença, ele se prepara pra lhe atacar',10,1,148);
 INSERT INTO monstro VALUES (DEFAULT,'Sucuri',4,'Uma jovem sucuri lhe encontra e está preste a lhe atacar',20,2,85);
 INSERT INTO monstro VALUES (DEFAULT,'Jacare',8,'Um grande jacare faminto pronto pra atacar qualquer um que encontrar',35,4,118);
@@ -244,10 +252,11 @@ INSERT INTO monstro VALUES (DEFAULT,'Olaf (BOSS)',25,'aparente se mostra somente
 
 -- mochila
 INSERT INTO mochila VALUES (DEFAULT);
+INSERT INTO mochila VALUES (DEFAULT);
 
 -- jogador
-INSERT INTO jogador VALUES (DEFAULT, 'Joao',100,36,1, 3,NULL,NULL);
-INSERT INTO jogador VALUES (DEFAULT, 'carlos',100,36,1, 3,NULL,NULL);
+INSERT INTO jogador VALUES (DEFAULT, 'Joao',100,36,1, 1,NULL,NULL);
+INSERT INTO jogador VALUES (DEFAULT, 'carlos',100,36,2, 1,NULL,NULL);
 
 
 -- mochila_guarda_instancia_de_item

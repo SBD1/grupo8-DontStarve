@@ -357,10 +357,11 @@ def crafitar(jogador, craft):
     return True
 
 
-def morte(jogador):
+def morte(id_jogador):
     menu.clear()
     input(f'[i] sua vida chegou a 0')
     input(f'[i] voce morreu')
     input(f'[i] clice ENTER para continuar')
-    bd.del_jogador(jogador.id)
+
+    bd.del_jogador(id_jogador)
     os.execl(sys.executable, sys.executable, *sys.argv)

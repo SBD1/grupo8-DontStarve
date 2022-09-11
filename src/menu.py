@@ -55,6 +55,7 @@ def menu_init():
 
 def menu_carregar_jogo():
     jogos_salvos = []
+    ids = []
     opt_carregar = -1
     clear()
 
@@ -67,6 +68,7 @@ def menu_carregar_jogo():
 
     if jogos_salvos:
         for jogador in jogos_salvos:
+            ids.append(jogador[0])
             print(f'[{jogador[0]}] {jogador[1]}')
         print(f'\n[0] Cancelar')
 
@@ -88,7 +90,7 @@ def menu_carregar_jogo():
         if opt_carregar == 0:
             return -1 
         
-        if  jogos_salvos.__contains__(jogos_salvos[opt_carregar-1]):
+        if  ids.__contains__(opt_carregar):
             clear()
             print('[+] Carregango jogo...')
             input("[i] precione enter para continuar")
@@ -107,7 +109,7 @@ def menu_novo_jogo():
             print('[-] Nenhum nome inserido, jogador nao criado')
             input("[i] precione enter para continuar")
             return -1
-            
+
         jogador = bd.novo_jogador(nome_jogador)
         
         if jogador == -1:
@@ -123,6 +125,7 @@ def menu_jogador(jogador):
 
     while True:
         clear()
+        jogador = bd.get_jogador_id(jogador.id)
         posicao_jogador = bd.get_posicao_jogador(jogador.id)
         print(posicao_jogador.descricao)
         
