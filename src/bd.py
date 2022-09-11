@@ -46,25 +46,29 @@ def set_vida_jogador(jogador, vida):
 def novo_jogador(nome: str):
     # inserir novo jogador no bd, em caso de falha retornar False
     # em caso de sucesso:
-    cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
-    cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
-    id_mochila = cursor.fetchone()
-    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 3,NULL,NULL);")
-    id = cursor.lastrowid
-    return get_jogador_id(id)
+    try:
+        cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
+        cursor.execute(f"SELECT id FROM mochila ORDER BY id DESC LIMIT 1;")
+        id_mochila = cursor.fetchone()[0]
+        cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila}, 3,NULL,NULL);")
+        cursor.execute(f"SELECT id FROM jogador ORDER BY id DESC LIMIT 1;")
+        id_jogador = cursor.fetchone()[0]
+        return get_jogador_id(id_jogador)
+    except:
+        return -1
 
 
-def get_posicao_jogador (id):
+def get_posicao_jogador(id_jogador):
     # pegar infos da posicao que o jogador se encontra no banco
-    cursor.execute(f"SELECT id_posicao FROM jogador WHERE id ='{id}'")
-    idpos = cursor.fetchone()[0]
-    return get_posicao(idpos)
+    cursor.execute(f"SELECT id_posicao FROM jogador WHERE id ='{id_jogador}'")
+    id_pos = cursor.fetchone()[0]
+    return get_posicao(id_pos)
 
 
 def set_posicao_jogador (id, posicao):
     # setar posicao do jogador "nome" para "posicao"
     cursor.execute(f"UPDATE jogador SET id_posicao = {posicao} WHERE id = '{id}'")
-    return True
+    return
 
 
 def get_inventario_por_tipo (id, tipo):
