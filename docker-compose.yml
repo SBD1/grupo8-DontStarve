@@ -17,6 +17,7 @@ services:
   db:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
+      - ./basededados:/var/lib/postgresql/data
     image: postgres
     restart: always
     environment:

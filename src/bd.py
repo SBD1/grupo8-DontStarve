@@ -3,12 +3,11 @@
 from turtle import position
 import psycopg2
 conn = psycopg2.connect(
-    host = "db",
+    host = "0.0.0.0",
     port = "5432",
     database="dontstarve",
     user="sbd1",
     password="asdfghjkl")
-
 cursor = conn.cursor()
 
 def get_jogadores():
@@ -32,15 +31,14 @@ def get_jogador_id(id):
 def del_jogador(id):
     try:
         cursor.execute(f"DELETE FROM jogador WHERE id = {id}")
+        conn.commit()
     except:
-        try:
-            cursor.execute(f"DELETE FROM jogador WHERE id = {get_jogador_id(id)}")
-        except:
-            return False
+        return False
     return True
 
 def set_vida_jogador(jogador, vida):
     cursor.execute(f"UPDATE jogador SET vida = {vida} WHERE id = {jogador.id};")
+    conn.commit()
     return True
 
 def novo_jogador(nome: str):
@@ -50,8 +48,10 @@ def novo_jogador(nome: str):
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()
     cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 3,NULL,NULL);")
-    id = cursor.lastrowid
-    return get_jogador_id(id)
+    cursor.execute(f"SELECT id FROM jogador ORDER BY  id  DESC LIMIT 1;")
+    id = cursor.fetchone()
+    conn.commit()
+    return get_jogador_id(id[0])
 
 
 def get_posicao_jogador (id):
@@ -64,6 +64,7 @@ def get_posicao_jogador (id):
 def set_posicao_jogador (id, posicao):
     # setar posicao do jogador "nome" para "posicao"
     cursor.execute(f"UPDATE jogador SET id_posicao = {posicao} WHERE id = '{id}'")
+    conn.commit()
     return True
 
 
@@ -198,6 +199,7 @@ def get_posicao(id_pos):
 ## TODO
 def set_pedras(id_pos, pedras):
     cursor.execute(f"UPDATE posicao SET pedras = {pedras} WHERE id = {id_pos}")
+    conn.commit()
     return True
 
 
@@ -213,6 +215,7 @@ def get_item_por_id(id_item):
 
 def set_item_equipado(id_jogador, id_instancia_item):
     cursor.execute(f"UPDATE jogador SET id_item_equipado = {id_instancia_item} WHERE id = {(id_jogador)}")
+    conn.commit()
     return True
     
 
@@ -224,6 +227,7 @@ def get_item_equipado(id_jogado):
 
 def set_roupa_equipada(id_jogador, id_instancia_item):
     cursor.execute(f"UPDATE jogador SET id_roupa_equipada = {id_instancia_item} WHERE id = {(id_jogador)}")
+    conn.commit()
     return True
 
 
@@ -235,6 +239,7 @@ def get_roupa_equipada(id_jogador):
 def add_instancia_item_possicao(id_pos, id_instancia):
     # adicionar linha na tabela instancia_item_posicao, retornar T/F
     cursor.execute(f"INSERT INTO instancia_item_posicao VALUES ({id_pos},{id_instancia})")
+    conn.commit()
     return True
 
 
@@ -251,6 +256,7 @@ def get_instancia_item_posicao(id_pos):
 def del_instancia_item_posicao(id_pos, id_instancia):
     # deletar linha na tabela instancia_item_posicao, retornar T/F
     cursor.execute(f"DELETE FROM instancia_item_posicao WHERE id_posicao = {id_pos} AND id_instancia_item = {id_instancia}")
+    conn.commit()
     return cursor.fetchall()
 
 
@@ -281,7 +287,7 @@ def verificar_inventario(jogador, id_item, quantidade = 1):
 def criar_instancia_item(id_item,tipo):
     # criar uma nova instancia de item e retornar seu id
     cursor.execute(f"INSERT INTO instancia_item VALUES (DEFAULT,{id_item},'{tipo}')")
-
+    conn.commit()
     return cursor.fetchall()
 
 
@@ -289,6 +295,7 @@ def remover_item_iventario(id, id_item):
 
     id_mochila = get_mochila_id(id)
     cursor.execute(f"DELETE FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item = {id_item}")
+    conn.commit()
     return cursor.fetchall()
     
 
@@ -296,6 +303,7 @@ def adicionar_item_iventario(id, id_instancia_item):
     # adicionar item na mochila do jogador
     id_mochila = get_mochila_id(id)
     cursor.execute(f"INSERT INTO mochila_guarda_instancia_de_item VALUES ({id_mochila},{id_instancia_item})")
+    conn.commit()
     return cursor.fetchall()
 
 
@@ -328,6 +336,7 @@ def get_monstros_by_pos(id_pos):
 def del_monstro(id_monstro):
     try:
         cursor.execute(f"DELETE FROM monstro WHERE id = {id_monstro}")
+        conn.commit()
         return True
     except:
         return False
