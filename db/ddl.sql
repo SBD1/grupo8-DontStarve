@@ -32,7 +32,7 @@ CREATE TABLE mapa(
 
 CREATE TABLE bioma(
     id SERIAL,
-    chance_batalha INT NOT NULL,
+    chance_batalha REAL NOT NULL,
     delta_temp INT NOT NULL,
     nome texto NOT NULL,
     nivel INT,
@@ -177,7 +177,7 @@ CREATE TABLE craft(
 CREATE OR REPLACE FUNCTION walk_monster() RETURNS trigger as $walk_monster$
 BEGIN
     -- UPDATE monstro SET id_posicao=(SELECT floor(random()*(153-1+1))+1);
-    UPDATE monstro SET id_posicao=(SELECT floor(random()*(3-(-2))-2) + OLD.id_posicao ) WHERE id=(SELECT floor(random()*(16-1+1))+1);
+    UPDATE monstro SET id_posicao=(SELECT abs(floor(random()*(3-(-2))-2)) + OLD.id_posicao ) WHERE id=(SELECT floor(random()*(16-1+1))+1);
     RETURN new;
 END;
 $walk_monster$ LANGUAGE plpgsql;

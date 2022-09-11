@@ -109,7 +109,7 @@ def menu_novo_jogo():
             print('[-] Nenhum nome inserido, jogador nao criado')
             input("[i] precione enter para continuar")
             return -1
-            
+
         jogador = bd.novo_jogador(nome_jogador)
         
         if jogador == -1:
@@ -125,6 +125,7 @@ def menu_jogador(jogador):
 
     while True:
         clear()
+        jogador = bd.get_jogador_id(jogador.id)
         posicao_jogador = bd.get_posicao_jogador(jogador.id)
         print(posicao_jogador.descricao)
         

@@ -36,8 +36,8 @@ def del_jogador(id):
         return False
     return True
 
-def set_vida_jogador(jogador, vida):
-    cursor.execute(f"UPDATE jogador SET vida = {vida} WHERE id = {jogador.id};")
+def set_vida_jogador(id_jogador, vida):
+    cursor.execute(f"UPDATE jogador SET vida = {vida} WHERE id = {id_jogador};")
     conn.commit()
     return True
 
@@ -54,11 +54,11 @@ def novo_jogador(nome: str):
     return get_jogador_id(id[0])
 
 
-def get_posicao_jogador (id):
+def get_posicao_jogador(id_jogador):
     # pegar infos da posicao que o jogador se encontra no banco
-    cursor.execute(f"SELECT id_posicao FROM jogador WHERE id ='{id}'")
-    idpos = cursor.fetchone()[0]
-    return get_posicao(idpos)
+    cursor.execute(f"SELECT id_posicao FROM jogador WHERE id ='{id_jogador}'")
+    id_pos = cursor.fetchone()[0]
+    return get_posicao(id_pos)
 
 
 def set_posicao_jogador (id, posicao):
@@ -322,15 +322,24 @@ def get_bioma(id_bioma):
 def get_monstros_by_pos(id_pos):
     cursor.execute(f"SELECT * FROM monstro WHERE id_posicao = {id_pos}")
     aux = cursor.fetchone()
-    monstro = type('', (), {})()
-    monstro.id = aux[0]
-    monstro.nome = aux[1]
-    monstro.dano = aux[2]
-    monstro.descricao = aux[3]
-    monstro.vida = aux[4]
-    monstro.isca = aux[5]
-    monstro.id_posicao = aux[6]
-    return monstro
+
+    monstros = []
+
+    try:
+        aux = list(aux)[::-1]
+        while aux:
+            monstro = type('', (), {})()
+            monstro.id = aux.pop()
+            monstro.nome = aux.pop()
+            monstro.dano = aux.pop()
+            monstro.descricao = aux.pop()
+            monstro.vida = aux.pop()
+            monstro.isca = aux.pop()
+            monstro.id_posicao = aux.pop()
+            monstros.append(monstro)
+
+    finally:
+        return monstros
 
 
 def del_monstro(id_monstro):
