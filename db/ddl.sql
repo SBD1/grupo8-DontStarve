@@ -32,7 +32,7 @@ CREATE TABLE mapa(
 
 CREATE TABLE bioma(
     id SERIAL,
-    chance_batalha INT NOT NULL,
+    chance_batalha REAL NOT NULL,
     delta_temp INT NOT NULL,
     nome texto NOT NULL,
     nivel INT,

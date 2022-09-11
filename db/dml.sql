@@ -220,6 +220,12 @@ INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
 -- (Pantano)
 --( nome,dano,descricao,vida,isca,posicao)
 
+
+INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo2',2,'sapo2',10,1,2);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo3',2,'sapo3',10,1,3);
+
 INSERT INTO monstro VALUES (DEFAULT,'Sapo',2,'Sapo está irritado com sua presença, ele se prepara pra lhe atacar',10,1,148);
 INSERT INTO monstro VALUES (DEFAULT,'Sucuri',4,'Uma jovem sucuri lhe encontra e está preste a lhe atacar',20,2,85);
 INSERT INTO monstro VALUES (DEFAULT,'Jacare',8,'Um grande jacare faminto pronto pra atacar qualquer um que encontrar',35,4,118);

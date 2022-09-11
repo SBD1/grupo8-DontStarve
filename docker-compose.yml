@@ -1,33 +1,33 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  dontstarve:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    image: sbd1/dontstarve
-    volumes: 
-     - .:/app
-    restart: always
-    depends_on:
-      - db
-    links:
-      - "db:database"
+    dontstarve:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: sbd1/dontstarve
+        volumes:
+            - .:/app
+        restart: always
+        depends_on:
+            - db
+        links:
+            - "db:database"
 
-  db:
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d/
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=asdfghjkl
-      - POSTGRES_USER=sbd1
-      - POSTGRES_DB=sbd1
-    ports:
-        - "5432:5432"
-    command: -p 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
+    db:
+        volumes:
+            - ./db:/docker-entrypoint-initdb.d/
+        image: postgres
+        # restart: always
+        environment:
+            - POSTGRES_PASSWORD=asdfghjkl
+            - POSTGRES_USER=sbd1
+            - POSTGRES_DB=sbd1
+        ports:
+            - "5432:5432"
+        command: -p 5432
+        healthcheck:
+            test: ["CMD", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+            timeout: 45s
+            interval: 10s
+            retries: 10

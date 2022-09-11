@@ -30,19 +30,19 @@ def andar(jogador, posicao_jogador):
             continue
 
         if opt_andar == 1 and posicao_jogador.norte != None:
-            # world.verificar_luta(jogador, posicao_jogador.norte)
+            world.verificar_luta(jogador, posicao_jogador.norte)
             bd.set_posicao_jogador(jogador.id, posicao_jogador.norte)
             return True
         if opt_andar == 2 and posicao_jogador.sul != None:
-            # world.verificar_luta(jogador, posicao_jogador.sul)
+            world.verificar_luta(jogador, posicao_jogador.sul)
             bd.set_posicao_jogador(jogador.id, posicao_jogador.sul)
             return True
         if opt_andar == 3 and posicao_jogador.leste != None:
-            # world.verificar_luta(jogador, posicao_jogador.leste)
+            world.verificar_luta(jogador, posicao_jogador.leste)
             bd.set_posicao_jogador(jogador.id, posicao_jogador.leste)
             return True
         if opt_andar == 4 and posicao_jogador.oeste != None:
-            # world.verificar_luta(jogador, posicao_jogador.oeste)
+            world.verificar_luta(jogador, posicao_jogador.oeste)
             bd.set_posicao_jogador(jogador.id, posicao_jogador.oeste)
             return True
 
@@ -357,10 +357,11 @@ def crafitar(jogador, craft):
     return True
 
 
-def morte(jogador):
+def morte(id_jogador):
     menu.clear()
     input(f'[i] sua vida chegou a 0')
     input(f'[i] voce morreu')
     input(f'[i] clice ENTER para continuar')
-    bd.del_jogador(jogador.id)
+
+    bd.del_jogador(id_jogador)
     os.execl(sys.executable, sys.executable, *sys.argv)

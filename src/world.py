@@ -28,14 +28,14 @@ def colocar_na_pos(jogador, id_item):
 
 
 def verificar_luta(jogador, id_pos):
-
     pos = bd.get_posicao(id_pos)
     bioma = bd.get_bioma(pos.bioma)
 
     sorte = random.uniform(0, 1)
+    input(str(sorte) + ' ' +str(bioma.chance_batalha))
     if sorte <= bioma.chance_batalha:
-
         monstros = bd.get_monstros_by_pos(id_pos)
+
         if len(monstros) == 0:
             return
 
@@ -45,9 +45,7 @@ def verificar_luta(jogador, id_pos):
 
 
 
-def luta(player, monstro):
-    jogador = bd.get_jogador(player.id)
-
+def luta(jogador, monstro):
     menu.clear()
     print(f'[i] um {monstro.nome} selvagem apareceu!')
     print(f'[i] {monstro.descricao}')
