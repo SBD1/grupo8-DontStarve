@@ -1,6 +1,4 @@
-# mock
-# mock jogador
-from turtle import position
+
 import psycopg2
 conn = psycopg2.connect(
     host = "db",

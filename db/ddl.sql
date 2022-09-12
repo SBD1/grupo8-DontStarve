@@ -175,9 +175,35 @@ CREATE TABLE craft(
 -- Trigger and Storage section.
 
 CREATE OR REPLACE FUNCTION walk_monster() RETURNS trigger as $walk_monster$
+DECLARE
+    id_monstro integer;
+    escolha integer;
 BEGIN
     -- UPDATE monstro SET id_posicao=(SELECT floor(random()*(153-1+1))+1);
-    UPDATE monstro SET id_posicao=(SELECT abs(floor(random()*(3-(-2))-2)) + OLD.id_posicao ) WHERE id=(SELECT floor(random()*(16-1+1))+1);
+    SELECT floor(random()*(16))+1 AS numero INTO id_monstro;
+   SELECT floor(random()*(4))+1 AS numero INTO escolha;
+    IF ((SELECT COUNT(*) FROM jogador WHERE id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro )) < 1) THEN
+        IF escolha = 1 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -9 > 0 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -9 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 2 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +1 < 153 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +1 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 3 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -1 > 0 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -1 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 4 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +9 < 153 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +9 WHERE id = id_monstro;
+            END IF;
+        END IF;
+    END IF;
     RETURN new;
 END;
 $walk_monster$ LANGUAGE plpgsql;
