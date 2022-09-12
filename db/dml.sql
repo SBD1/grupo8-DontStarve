@@ -159,15 +159,15 @@ INSERT INTO posicao VALUES (141,1, 1, 132, 150, 142, 140, 'Passarinhos e anões 
 INSERT INTO posicao VALUES (142,1, 1, 133, 151, 143, 141, 'Passarinhos e anões .',0,0);
 INSERT INTO posicao VALUES (143,1, 1, 134, 152, 144, 142, 'Passarinhos e anões .',0,0);
 INSERT INTO posicao VALUES (144,1, 1, 135, NULL, 145, 143, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (145,1, 2, 136, NULL, 146, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (146,1, 2, 137, NULL, 147, 145, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (147,1, 2, 138, NULL, 148, 146, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (148,1, 2, 139, NULL, 149, 147, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (145,1, 2, 136, NULL, 146, NULL, 'Você foi longe demais!! se encontra cercado por montanhas gigantescas o unico caminho possivel se encontra a norte e a leste',0,0);
+INSERT INTO posicao VALUES (146,1, 2, 137, NULL, 147, 145, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
+INSERT INTO posicao VALUES (147,1, 2, 138, NULL, 148, 146, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
+INSERT INTO posicao VALUES (148,1, 2, 139, NULL, 149, 147, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
 INSERT INTO posicao VALUES (149,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
-INSERT INTO posicao VALUES (150,1, 1, 141, NULL, 151, 149, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (151,1, 1, 142, NULL, 152, 150, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (152,1, 1, 143, NULL, 153, 151, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (153,1, 1, 144, NULL, NULL, 152, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (150,1, 1, 141, NULL, 151, 149, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
+INSERT INTO posicao VALUES (151,1, 1, 142, NULL, 152, 150, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
+INSERT INTO posicao VALUES (152,1, 1, 143, NULL, 153, 151, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção ',0,0);
+INSERT INTO posicao VALUES (153,1, 1, 144, NULL, NULL, 152, 'Você foi longe demais!! se encontra cercado por montanhas gigantescas o unico caminho possivel se encontra a norte e a oeste',0,0);
 
 
 -- arma
