@@ -8,7 +8,7 @@ INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.1, 5
 
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.2, 10, 'pantano');
 
-INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.4, 20, 'Deerto');
+INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.4, 20, 'deserto');
 
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.6, -20, 'Tundra');
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.0, 0, 'Ponte');
@@ -16,14 +16,14 @@ INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 1.0, 0
 
 -- posicaoes
 INSERT INTO posicao VALUES (1,1, 3, NULL, 10, 2, NULL, 'O jogador se encontra no fim da ilha, unico caminho póssivel se encontra a sul ou oeste');
-INSERT INTO posicao VALUES (2,1, 3, NULL, 11, 3, 1,'O jogador está na beira do fim da ilha ao norte ele vê nada além de vazio');
-INSERT INTO posicao VALUES (3,1, 3, NULL, 12, 4, 2, 'O jogador está na beira do fim da ilha ao norte ele vê nada além de vazio');
-INSERT INTO posicao VALUES (4,1, 3, NULL, 13, 5, 3, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
+INSERT INTO posicao VALUES (2,1, 3, NULL, 11, 3, 1,'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio');
+INSERT INTO posicao VALUES (3,1, 3, NULL, 12, 4, 2, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio');
+INSERT INTO posicao VALUES (4,1, 3, NULL, 13, 5, 3, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio');
 INSERT INTO posicao VALUES (5,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui');
-INSERT INTO posicao VALUES (6,1, 4, NULL, 15, 7, 5, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
-INSERT INTO posicao VALUES (7,1, 4, NULL, 16, 8, 6, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
-INSERT INTO posicao VALUES (8,1, 4, NULL, 17, 9, 7, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
-INSERT INTO posicao VALUES (9,1, 4, NULL, NULL, NULL, NULL, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
+INSERT INTO posicao VALUES (6,1, 4, NULL, 15, 7, 5, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio');
+INSERT INTO posicao VALUES (7,1, 4, NULL, 16, 8, 6, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio ');
+INSERT INTO posicao VALUES (8,1, 4, NULL, 17, 9, 7, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio ');
+INSERT INTO posicao VALUES (9,1, 4, NULL, NULL, NULL, NULL, 'O jogador está na beira do fim da ilha, ao norte ele vê nada além de vazio');
 INSERT INTO posicao VALUES (10,1, 3, 1, 19, 11, 9, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
 INSERT INTO posicao VALUES (11,1, 3, 2, 20, 12, 10, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
 INSERT INTO posicao VALUES (12,1, 3, 3, 21, 13, 11, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
