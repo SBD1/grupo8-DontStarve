@@ -1,7 +1,9 @@
 
+import re
+from unittest import result
 import psycopg2
 conn = psycopg2.connect(
-    host = "db",
+    host = "0.0.0.0",
     port = "5432",
     database="dontstarve",
     user="sbd1",
@@ -69,62 +71,25 @@ def set_posicao_jogador (id, posicao):
 def get_inventario_por_tipo (id, tipo):
     # retornar todos as intancias de item associadas a mochila player.mochila no formato[[instancia, item], ...]
     cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = {id}")
-    id_mochila = cursor.fetchone()
-    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item IN (SELECT id FROM instancia_item WHERE tipo = {tipo})")
+    id_mochila = cursor.fetchone()[0]
+    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item IN (SELECT id FROM instancia_item WHERE tipo = ' {tipo} ')")
     instancias = cursor.fetchone()
     result = []
-    if(tipo == 'a'):
+    if(tipo == 'a') and (instancias != None):
         for i in instancias:
-            cursor.execute(f"SELECT id_item FROM instancia_item WHERE id = {i[0]}")
-            id_item = cursor.fetchone()
-            cursor.execute(f"SELECT * FROM arma WHERE id = {id_item}")
-            aux = cursor.fetchone()
-            arma = type('', (), {})()
-            arma.id = aux[0]
-            arma.nome = aux[1]
-            arma.dano = aux[2]
-            arma.descricao = aux[3]
-            arma.instancia = i
+            arma = get_item_por_id_instancia(i)
             result.append(arma)
-    elif(tipo == 'f'):
+    elif(tipo == 'f') and (instancias != None):
         for i in instancias:
-            cursor.execute(f"SELECT id_item FROM instancia_item WHERE id = {i[0]}")
-            id_item = cursor.fetchone()
-            cursor.execute(f"SELECT * FROM ferramenta WHERE id = {id_item}")
-            aux = cursor.fetchone()
-            ferramenta = type('', (), {})()
-            ferramenta.id = aux[0]
-            ferramenta.nome = aux[1]
-            ferramenta.funcao = aux[2]
-            ferramenta.descricao = aux[3]
-            ferramenta.instancia = i
+            ferramenta = get_item_por_id_instancia(i)
             result.append(ferramenta)
-    elif(tipo == 'r'):
+    elif(tipo == 'r') and (instancias != None):
         for i in instancias:  
-            cursor.execute(f"SELECT id_item FROM instancia_item WHERE id = {i[0]}")
-            id_item = cursor.fetchone()
-            cursor.execute(f"SELECT * FROM roupa WHERE id = {id_item}")
-            aux = cursor.fetchone()
-            roupa = type('', (), {})()
-            roupa.id = aux[0]
-            roupa.nome = aux[1]
-            roupa.protecao_termica = aux[2]
-            roupa.protecao_fisica = aux[3]
-            roupa.descricao = aux[4]
-            roupa.instancia = i
+            roupa = get_item_por_id_instancia(i)
             result.append(roupa)
-    elif(tipo == 'i'):
+    elif(tipo == 'i') and (instancias != None):
         for i in instancias:  
-            cursor.execute(f"SELECT id_item FROM instancia_item WHERE id = {i[0]}")
-            id_item = cursor.fetchone()
-            cursor.execute(f"SELECT * FROM ingrediente WHERE id = {id_item}")
-            aux = cursor.fetchone()
-            ingrediente = type('', (), {})()
-            ingrediente.id = aux[0]
-            ingrediente.nome = aux[1]
-            ingrediente.funcao = aux[2]
-            ingrediente.descricao = aux[3]
-            ingrediente.instancia = i
+            ingrediente = get_item_por_id_instancia(i)
             result.append(ingrediente)
     return result
 
@@ -206,11 +171,6 @@ def get_instancia_item_por_id(id_item):
     cursor.execute(f"SELECT * FROM instancia_item WHERE id = {id_item}")
     return cursor.fetchall()
 
-    
-def get_item_por_id(id_item):
-    cursor.execute(f"SELECT * FROM item WHERE id = {id_item}")
-    return cursor.fetchall()
-
 
 def set_item_equipado(id_jogador, id_instancia_item):
     cursor.execute(f"UPDATE jogador SET id_item_equipado = {id_instancia_item} WHERE id = {(id_jogador)}")
@@ -220,8 +180,10 @@ def set_item_equipado(id_jogador, id_instancia_item):
 
 
 def get_item_equipado(id_jogado):
-    cursor.execute(f"SELECT * FROM jogador WHERE id = {(id_jogado)}")
-    return cursor.fetchall()
+    cursor.execute(f"SELECT id_item_equipado FROM jogador WHERE id = {(id_jogado)}")
+    id_item = cursor.fetchone()
+    result = get_item_por_id_instancia(id_item[0]) if id_item[0] != None else None
+    return result
 
 
 def set_roupa_equipada(id_jogador, id_instancia_item):
@@ -231,8 +193,10 @@ def set_roupa_equipada(id_jogador, id_instancia_item):
 
 
 def get_roupa_equipada(id_jogador):
-    cursor.execute(f"SELECT * FROM jogador WHERE id = {(id_jogador)}")
-    return cursor.fetchone()
+    cursor.execute(f"SELECT id_roupa_equipada FROM jogador WHERE id = {id_jogador}")
+    id_item = cursor.fetchone()
+    result = get_item_por_id_instancia(id_item[0]) if id_item[0] != None else None
+    return result
 
 
 def add_instancia_item_possicao(id_pos, id_instancia):
@@ -245,10 +209,11 @@ def add_instancia_item_possicao(id_pos, id_instancia):
 def get_instancia_item_posicao(id_pos):
     # retornar todos as instancia_item_posicao que tenha como id_posicao "id_pos"
     cursor.execute(f"SELECT id_instancia_item FROM instancia_item_posicao WHERE id_posicao = {id_pos}")
-    aux = cursor.fetchall()
+    aux = cursor.fetchone()
     result = []
-    for i in aux:
-        result.append(get_instancia_item_por_id(i))
+    if aux:
+        for i in aux:
+            result.append(get_instancia_item_por_id(i))
     return result
 
 
@@ -256,31 +221,100 @@ def del_instancia_item_posicao(id_pos, id_instancia):
     # deletar linha na tabela instancia_item_posicao, retornar T/F
     cursor.execute(f"DELETE FROM instancia_item_posicao WHERE id_posicao = {id_pos} AND id_instancia_item = {id_instancia}")
     conn.commit()
-    return cursor.fetchall()
+    return cursor.fetchone()
 
 
 def get_crafts(workbench):
 
     # retornar todos os crafts se 'workbench' == True
     if workbench:
-        return cursor.execute(f"SELECT * FROM craft").fetchall()
-    return cursor.execute(f"SELECT * FROM craft WHERE necessita_workbench = 'false'").fetchall()
+        cursor.execute(f"SELECT * FROM craft")
+    else:
+        cursor.execute(f"SELECT * FROM craft WHERE necessita_workbench = 'false'")
+    aux = cursor.fetchall()
+    result = []
+    if aux:
+        for i in aux:
+            item = get_item_por_id(i[0])
+            craft = type('', (), {})()
+            craft.id = i[0]
+            craft.id_item1= i[1]
+            craft.quant_item1 = i[2]
+            craft.id_item2 = i[3]
+            craft.quant_item2 = i[4]
+            craft.id_item3 = i[5]
+            craft.quant_item3 = i[6]
+            craft.needs_workbench = i[7]
+            craft.descricao = i[8]
+            craft.nome = item.nome if item else None
+            result.append(craft)
+    return result
 
-    #TODO find via id player
-def get_mochila_id(nome_jogador):
-    cursor.execute(f"SELECT id_mochila FROM jogador WHERE nome = '{nome_jogador[1]}'")
+def get_item_por_id(id):
+    try:
+        cursor.execute(f"SELECT * FROM arma WHERE id = {id}")
+        aux = cursor.fetchone()
+        if aux:
+            arma = type('', (), {})()
+            arma.id = aux[0]
+            arma.nome = aux[1]
+            arma.dano = aux[2]
+            arma.descricao = aux[3]
+            return arma
+    except:
+        try:
+            cursor.execute(f"SELECT * FROM ferramenta WHERE id = {id}")
+            aux = cursor.fetchone()
+            if aux:
+                ferramenta = type('', (), {})()
+                ferramenta.id = aux[0]
+                ferramenta.nome = aux[1]
+                ferramenta.defesa = aux[2]
+                ferramenta.descricao = aux[3]
+                return ferramenta
+        except:
+            try:
+                cursor.execute(f"SELECT * FROM roupa WHERE id = {id}")
+                aux = cursor.fetchone()
+                if aux:
+                    roupa = type('', (), {})()
+                    roupa.id = aux[0]
+                    roupa.nome = aux[1]
+                    roupa.defesa = aux[2]
+                    roupa.descricao = aux[3]
+                    return roupa
+            except:
+                try:
+                    cursor.execute(f"SELECT * FROM ingrediente WHERE id = {id}")
+                    aux = cursor.fetchone()
+                    if aux:
+                        ingrediente = type('', (), {})()
+                        ingrediente.id = aux[0]
+                        ingrediente.nome = aux[1]
+                        ingrediente.descricao = aux[2]
+                        return ingrediente
+                except:
+                    return None;
+
+
+def get_mochila_id(jogador):
+    cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = '{jogador.id}'")
     return cursor.fetchone()[0]
 
-def verificar_inventario(jogador, id_item, quantidade = 1):
-    # retornar True se o jogador possuir quantidade do item necessario, False se nao
+def verificar_inventario(id, id_item, quantidade = 1):
+    # retornar True se o jogador possuir quantidade do item necessário, False se nao
     # SELECT 
-    # COUNT(cod_servico) AS quantidade
-    # FROM tb_ordem_servico
-    # WHERE cod_servico = 'A';
-    ## TODO
-    cursor.execute(f"SELECT (id_instancia_item) FROM mochila_guarda_instancia_de_item WHERE id_mochila = {get_mochila_id(id)} AND id_instancia_item = {id_item}")
-    return cursor.fetchone()[0] >= quantidade
-
+    # COUNT(cod_serviço) AS quantidade
+    # FROM tb_ordem_serviço
+    # WHERE cod_serviço = 'A';
+    cursor.execute(f"SELECT id_instancia_item FROM instancia_item WHERE id_item = {id_item}")
+    aux = cursor.fetchone()
+    if(len(aux) > quantidade):
+        cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {get_mochila_id(id)} ")
+        aux2 = cursor.fetchone()
+        if(aux2 in aux):
+            return True
+    return False
 
     #TODO return id instancia item
 def criar_instancia_item(id_item,tipo):

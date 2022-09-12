@@ -56,12 +56,13 @@ def inventario(jogador):
     menu.clear()
 
     item_equipado = bd.get_item_equipado(jogador.id)
-    if item_equipado[1]:
-        print(f'[i] Item equipado:  {item_equipado[1].nome}')
+    print(f'equipada: {item_equipado}')
+    if item_equipado:
+        print(f'[i] Item equipado:  {item_equipado.nome}')
 
     roupa_equipada = bd.get_roupa_equipada(jogador.id)
-    if roupa_equipada[1]:
-        print(f'[i] Roupa equipado: {roupa_equipada[1].nome}')
+    if roupa_equipada:
+        print(f'[i] Roupa equipado: {roupa_equipada.nome}')
 
     print("\n[1] Armas")
     print("[2] Roupas")
@@ -277,7 +278,7 @@ def craft(jogador, posicao):
         menu.clear()
         print('[i] Craft\n')
 
-        itens_na_pos = bd.get_instancia_item_possicao(posicao.id)
+        itens_na_pos = bd.get_instancia_item_posicao(posicao.id)
 
         if itens_na_pos:
             for item_na_pos in itens_na_pos:
@@ -288,6 +289,7 @@ def craft(jogador, posicao):
             lista_crafts = bd.get_crafts(False)
 
         i = 1
+        print(lista_crafts[0].id)
         for craft in lista_crafts:
             print(f'[{i}] {craft.nome}')
             i+=1

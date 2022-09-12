@@ -125,7 +125,6 @@ def menu_jogador(jogador):
 
     while True:
         clear()
-        jogador = bd.get_jogador_id(jogador.id)
         posicao_jogador = bd.get_posicao_jogador(jogador.id)
         print(posicao_jogador.descricao)
         
