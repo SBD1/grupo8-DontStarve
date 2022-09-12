@@ -27,9 +27,9 @@ INSERT INTO posicao VALUES (9,1, 4, NULL, 18, NULL, 8, 'O jogador se encontra no
 INSERT INTO posicao VALUES (10,1, 3, 1, 19, 11, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
 INSERT INTO posicao VALUES (11,1, 3, 2, 20, 12, 10, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.',0,0);
 INSERT INTO posicao VALUES (12,1, 3, 3, 21, 13, 11, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.',0,0);
-INSERT INTO posicao VALUES (13,1, 3, 4, 22, 14, 12, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.',0,0);
-INSERT INTO posicao VALUES (14,1, 5, 5, 23, 15, 13, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
-INSERT INTO posicao VALUES (15,1, 5, NULL, NULL, NULL, NULL, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
+INSERT INTO posicao VALUES (13,1, 3, 4, 22, NULL, 12, 'ao oeste existe uma ponte velha, pode ser que aguente você passar',0,0);
+INSERT INTO posicao VALUES (14,1, 5, NULL, NULL, 13, 15, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
+INSERT INTO posicao VALUES (15,1, 5, 6, 24, 16, 14, 'ao leste existe uma ponte velha, pode ser que aguente você passar',0,0);
 INSERT INTO posicao VALUES (16,1, 4, 7, 25, 17, 15, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.',0,0);
 INSERT INTO posicao VALUES (17,1, 4, 8, 26, 18, 16, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.',0,0);
 INSERT INTO posicao VALUES (18,1, 4, 9, 27, NULL, 17, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
@@ -78,7 +78,7 @@ INSERT INTO posicao VALUES (60,1, 4, 51, 69, 61, NULL, 'Voce encontra o rio que 
 INSERT INTO posicao VALUES (61,1, 4, 52, 70, 62, 60, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.',0,0);
 INSERT INTO posicao VALUES (62,1, 4, 53, 71, 63, 61, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.',0,0);
 INSERT INTO posicao VALUES (63,1, 4, 54, 72, NULL, 62, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
-INSERT INTO posicao VALUES (64,1, 3, 55, 73, 65, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
+INSERT INTO posicao VALUES (64,1, 3, 55, 73, 65, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali, ao sul existe um ponte que talvez possa passar',0,0);
 INSERT INTO posicao VALUES (65,1, 3, 56, NULL, 66, 64, 'Ao sul finalmente é possivel ver agua, mas você não sabe nada :( , ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (66,1, 3, 57, NULL, 67, 65, 'Ao sul finalmente é possivel ver agua, mas você não sabe nada :( , ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (67,1, 3, 58, NULL, NULL, 66, 'Ao sul finalmente é possivel ver agua, mas você não sabe nada :( , ache outro caminho, talvez exista uma ponte',0,0);
@@ -87,7 +87,7 @@ INSERT INTO posicao VALUES (69,1, 4, 60, NULL, 70, NULL, 'Ao sul e a oeste final
 INSERT INTO posicao VALUES (70,1, 4, 61, NULL, 71, 69, 'Ao sul finalmente é possivel ver agua, mas você não sabe nada :( , ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (71,1, 4, 62, NULL, 72, 70, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.',0,0);
 INSERT INTO posicao VALUES (72,1, 4, 63, NULL, NULL, 71, 'Ao sul finalmente é possivel ver agua, mas você não sabe nada :( , ache outro caminho, talvez exista uma ponte',0,0);
-INSERT INTO posicao VALUES (73,1, 5, 64, 82, NULL, 72, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
+INSERT INTO posicao VALUES (73,1, 5, 64, 82, NULL, NULL, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
 INSERT INTO posicao VALUES (74 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (75 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (76,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
@@ -96,7 +96,7 @@ INSERT INTO posicao VALUES (78 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição e
 INSERT INTO posicao VALUES (79 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (80 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (81 ,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
-INSERT INTO posicao VALUES (82,1, 2, 73, 91, 83, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
+INSERT INTO posicao VALUES (82,1, 2, 73, 91, 83, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali mas ao norte existe um ponte velha que atravessa o rio',0,0);
 INSERT INTO posicao VALUES (83,1, 2, NULL, 92, 84, 82, 'Ao norte é possivel ver um rio incrivel, mas a correnteza é muito forte. Melhor não ir por ali, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (84,1, 2, NULL, 93, 85, 83, 'Ao norte é possivel ver um rio incrivel, mas a correnteza é muito forte. Melhor não ir por ali, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (85,1, 2, NULL, 94, 86, 84, 'Você chegou ao limite do caminho, a norte e a leste existe um rio com correnteza fortissima, então decide pegar outro caminho',0,0);
@@ -126,9 +126,9 @@ INSERT INTO posicao VALUES (108,1, 1, 99, 117, NULL, 107, 'a leste é possivel v
 INSERT INTO posicao VALUES (109,1, 2, 100, 118, 110, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
 INSERT INTO posicao VALUES (110,1, 2, 101, 119, 111, 109, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
 INSERT INTO posicao VALUES (111,1, 2, 102, 120, 112, 110, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (112,1, 2, 103, 121, 113, 111, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (113,1, 5, 104, 122, 114, 112, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
-INSERT INTO posicao VALUES (114,1, 1, 105, 123, 115, 113, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (112,1, 2, 103, 121, 113, 111, 'A leste se encontra um ponta velha talvez possa passar por lá',0,0);
+INSERT INTO posicao VALUES (113,1, 5, NULL, NULL, 114, 112, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
+INSERT INTO posicao VALUES (114,1, 1, 105, 123, 115, 113, 'A oeste é possivel ver uma ponte velha talvez dê para passar por ali',0,0);
 INSERT INTO posicao VALUES (115,1, 1, 106, 124, 116, 114, 'Passarinhos e anões .',0,0);
 INSERT INTO posicao VALUES (116,1, 1, 107, 125, 117, 115, 'Passarinhos e anões .',0,0);
 INSERT INTO posicao VALUES (117,1, 1, 108, 126, NULL, 116, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
