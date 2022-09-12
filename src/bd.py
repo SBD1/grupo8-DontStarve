@@ -1,6 +1,4 @@
-# mock
-# mock jogador
-from turtle import position
+
 import psycopg2
 conn = psycopg2.connect(
     host = "db",
@@ -192,7 +190,8 @@ def get_posicao(id_pos):
     position.oeste = aux[6]
     position.descricao = aux[7]
     ## TODO implementar pedras
-    position.pedras =  0 #cursor.execute(f"SELECT * FROM instancia_item_posicao WHERE id_posicao = {id_pos}").fetchall()
+    position.pedras =  aux[8]
+    position.madeiras = aux[9]
     return position
 
 
@@ -318,13 +317,10 @@ def get_bioma(id_bioma):
     bioma.nivel = aux[4]
     return bioma
 
-#TODO return all monstros da pos
 def get_monstros_by_pos(id_pos):
     cursor.execute(f"SELECT * FROM monstro WHERE id_posicao = {id_pos}")
     aux = cursor.fetchone()
-
     monstros = []
-
     try:
         aux = list(aux)[::-1]
         while aux:
@@ -337,7 +333,6 @@ def get_monstros_by_pos(id_pos):
             monstro.isca = aux.pop()
             monstro.id_posicao = aux.pop()
             monstros.append(monstro)
-
     finally:
         return monstros
 

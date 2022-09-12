@@ -48,6 +48,8 @@ CREATE TABLE posicao (
     leste INT,
     oeste INT,
     descricao descricao,
+    pedras INT,
+    madeiras INT,
     CONSTRAINT posicao_pk PRIMARY KEY(id),
     -- CONSTRAINT norte_posicao_fk FOREIGN KEY(norte) REFERENCES posicao(id),
     -- CONSTRAINT sul_posicao_fk FOREIGN KEY(sul) REFERENCES posicao(id),
@@ -175,9 +177,35 @@ CREATE TABLE craft(
 -- Trigger and Storage section.
 
 CREATE OR REPLACE FUNCTION walk_monster() RETURNS trigger as $walk_monster$
+DECLARE
+    id_monstro integer;
+    escolha integer;
 BEGIN
     -- UPDATE monstro SET id_posicao=(SELECT floor(random()*(153-1+1))+1);
-    UPDATE monstro SET id_posicao=(SELECT abs(floor(random()*(3-(-2))-2)) + OLD.id_posicao ) WHERE id=(SELECT floor(random()*(16-1+1))+1);
+    SELECT floor(random()*(16))+1 AS numero INTO id_monstro;
+   SELECT floor(random()*(4))+1 AS numero INTO escolha;
+    IF ((SELECT COUNT(*) FROM jogador WHERE id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro )) < 1) THEN
+        IF escolha = 1 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -9 > 0 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -9 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 2 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +1 < 153 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +1 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 3 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -1 > 0 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) -1 WHERE id = id_monstro;
+            END IF;
+        END IF;
+        IF escolha = 4 THEN
+            IF (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +9 < 153 THEN
+                UPDATE monstro SET id_posicao = (SELECT id_posicao FROM monstro WHERE id = id_monstro ) +9 WHERE id = id_monstro;
+            END IF;
+        END IF;
+    END IF;
     RETURN new;
 END;
 $walk_monster$ LANGUAGE plpgsql;
@@ -199,4 +227,33 @@ $insert_itens$ LANGUAGE plpgsql;
 
 CREATE TRIGGER insert_itens_trigger
     AFTER INSERT ON jogador EXECUTE PROCEDURE insert_itens();
+
+
+---------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION generate_rand_recurses() RETURNS trigger as $generate_rand_recurses$
+DECLARE
+    stones integer;
+    wood integer;
+BEGIN
+    -- UPDATE monstro SET id_posicao=(SELECT floor(random()*(153-1+1))+1);
+    SELECT floor(random()*(50))+1 AS numero INTO stones;
+    SELECT floor(random()*(50))+1 AS numero INTO wood;
+    IF ((SELECT bioma FROM posicao WHERE id = old.id) = 1) THEN
+        UPDATE posicao SET pedras = stones, madeira = wood WHERE id = old.id;
+    END IF;
+    IF ((SELECT bioma FROM posicao WHERE id = old.id) = 2) THEN
+        UPDATE posicao SET pedras = floor(stones/1.5), madeira = floor(wood/1.5) WHERE id = old.id;
+    END IF;
+    IF ((SELECT bioma FROM posicao WHERE id = old.id) = 3) THEN
+        UPDATE posicao SET pedras = floor(stones/4), madeira = 0 WHERE id = old.id;
+    END IF;
+    IF ((SELECT bioma FROM posicao WHERE id = old.id) = 4) THEN
+        UPDATE posicao SET pedras = floor(stones/8), madeira = 0 WHERE id = old.id;
+    END IF;
+    RETURN new;
+END;
+$generate_rand_recurses$ LANGUAGE plpgsql;
+
+CREATE TRIGGER generate_rand_recurses_trigger
+    BEFORE INSERT ON posicao  EXECUTE PROCEDURE generate_rand_recurses();
 
