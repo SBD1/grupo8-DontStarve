@@ -3,7 +3,7 @@
 from turtle import position
 import psycopg2
 conn = psycopg2.connect(
-    host = "0.0.0.0",
+    host = "db",
     port = "5432",
     database="dontstarve",
     user="sbd1",
