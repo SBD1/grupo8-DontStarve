@@ -15,10 +15,9 @@ INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.0, 0
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 1.0, 0, 'Rio');
 
 -- posicaoes
-INSERT INTO posicao VALUES (1,1, 3, NULL, 2, 3, NULL, '1111111');
-INSERT INTO posicao VALUES (2,1, 3, 1, NULL, NULL, NULL,'2222222');
-INSERT INTO posicao VALUES (3,1, 3, NULL, NULL, NULL, 1, '3333333');
-
+INSERT INTO posicao VALUES (1,1, 3, NULL, 10, 2, NULL, 'O jogador se encontra no fim da ilha, unico caminho póssivel se encontra a sul ou oeste');
+INSERT INTO posicao VALUES (2,1, 3, NULL, 11, 3, 1,'O jogador está na beira do fim da ilha ao norte ele vê nada além de vazio');
+INSERT INTO posicao VALUES (3,1, 3, NULL, 12, 4, 2, 'O jogador está na beira do fim da ilha ao norte ele vê nada além de vazio');
 INSERT INTO posicao VALUES (4,1, 3, NULL, 13, 5, 3, 'Aqui jaz um deserto escaldante que não possui nada além de areia e animais peçonhentos.');
 INSERT INTO posicao VALUES (5,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui');
 INSERT INTO posicao VALUES (6,1, 4, NULL, 15, 7, 5, 'O gelo toma conta de tudo ao seu redor, tendo dificuldade inclusive de observar ao seu redor.');
@@ -220,11 +219,6 @@ INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
 -- (Pantano)
 --( nome,dano,descricao,vida,isca,posicao)
 
-
-INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
-INSERT INTO monstro VALUES (DEFAULT,'Sapo1',2,'sapo1',10,1,1);
-INSERT INTO monstro VALUES (DEFAULT,'Sapo2',2,'sapo2',10,1,2);
-INSERT INTO monstro VALUES (DEFAULT,'Sapo3',2,'sapo3',10,1,3);
 
 INSERT INTO monstro VALUES (DEFAULT,'Sapo',2,'Sapo está irritado com sua presença, ele se prepara pra lhe atacar',10,1,148);
 INSERT INTO monstro VALUES (DEFAULT,'Sucuri',4,'Uma jovem sucuri lhe encontra e está preste a lhe atacar',20,2,85);
