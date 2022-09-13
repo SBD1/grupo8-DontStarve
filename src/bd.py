@@ -1,6 +1,4 @@
 
-import re
-from unittest import result
 import psycopg2
 conn = psycopg2.connect(
     host = "db",
@@ -47,11 +45,20 @@ def novo_jogador(nome: str):
     cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()
-    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 153,NULL,NULL);")
+    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 134,NULL,NULL);")
     cursor.execute(f"SELECT id FROM jogador ORDER BY  id  DESC LIMIT 1;")
     id = cursor.fetchone()
+    cursor.execute(f"SELECT id FROM ferramenta WHERE nome =  'Picareta Detreriorada'")
+    id_picareta = cursor.fetchone()[0]
+    instancia_item1 = criar_instancia_item(id_picareta,'f')
+    cursor.execute(f"SELECT id FROM ferramenta WHERE nome =  'Machado Fraco'")
+    id_machado = cursor.fetchone()[0]
+    instancia_item2 = criar_instancia_item(id_machado,'f')
+    jogador = get_jogador_id(id[0])
+    adicionar_item_iventario(jogador,instancia_item1)
+    adicionar_item_iventario(jogador,instancia_item2)
     conn.commit()
-    return get_jogador_id(id[0])
+    return jogador
 
 
 def get_posicao_jogador(id_jogador):
@@ -72,25 +79,14 @@ def get_inventario_por_tipo (id, tipo):
     # retornar todos as intancias de item associadas a mochila player.mochila no formato[[instancia, item], ...]
     cursor.execute(f"SELECT id_mochila FROM jogador WHERE id = {id}")
     id_mochila = cursor.fetchone()[0]
-    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila} AND id_instancia_item IN (SELECT id FROM instancia_item WHERE tipo = ' {tipo} ')")
-    instancias = cursor.fetchone()
+    cursor.execute(f"SELECT id_instancia_item FROM mochila_guarda_instancia_de_item WHERE id_mochila = {id_mochila}")
+    instancias = cursor.fetchall()
     result = []
-    if(tipo == 'a') and (instancias != None):
-        for i in instancias:
-            arma = get_item_por_id_instancia(i)
-            result.append(arma)
-    elif(tipo == 'f') and (instancias != None):
-        for i in instancias:
-            ferramenta = get_item_por_id_instancia(i)
-            result.append(ferramenta)
-    elif(tipo == 'r') and (instancias != None):
-        for i in instancias:  
-            roupa = get_item_por_id_instancia(i)
-            result.append(roupa)
-    elif(tipo == 'i') and (instancias != None):
-        for i in instancias:  
-            ingrediente = get_item_por_id_instancia(i)
-            result.append(ingrediente)
+    for instancia in instancias:
+        cursor.execute(f"SELECT * FROM instancia_item WHERE id = {instancia[0]}")
+        news = cursor.fetchone()
+        if(news[2] == tipo):
+            result.append(get_item_por_id_instancia(instancia[0]))
     return result
 
 def get_item_por_id_instancia(id_instancia):
@@ -109,7 +105,7 @@ def get_item_por_id_instancia(id_instancia):
         arma.descricao = aux[3]
         arma.instancia = id_instancia
         return (arma)
-    if(tipo == 'f'):
+    elif(tipo == 'f'):
         cursor.execute(f"SELECT * FROM ferramenta WHERE id = {id_item}")
         aux = cursor.fetchone()
         ferramenta = type('', (), {})()
@@ -119,7 +115,7 @@ def get_item_por_id_instancia(id_instancia):
         ferramenta.descricao = aux[3]
         ferramenta.instancia = id_instancia
         return (ferramenta)
-    if(tipo == 'r'):
+    elif(tipo == 'r'):
         cursor.execute(f"SELECT * FROM roupa WHERE id = {id_item}")
         aux = cursor.fetchone()
         roupa = type('', (), {})()
@@ -130,7 +126,7 @@ def get_item_por_id_instancia(id_instancia):
         roupa.descricao = aux[4]
         roupa.instancia = id_instancia
         return (roupa)
-    if(tipo == 'i'):
+    elif(tipo == 'i'):
         cursor.execute(f"SELECT * FROM ingrediente WHERE id = {id_item}")
         aux = cursor.fetchone()
         ingrediente = type('', (), {})()
@@ -317,8 +313,9 @@ def verificar_inventario(id, id_item, quantidade = 1):
 def criar_instancia_item(id_item,tipo):
     # criar uma nova instancia de item e retornar seu id
     cursor.execute(f"INSERT INTO instancia_item VALUES (DEFAULT,{id_item},'{tipo}')")
+    cursor.execute(f"SELECT id FROM instancia_item ORDER BY  id  DESC LIMIT 1;")
     conn.commit()
-    return cursor.fetchall()
+    return cursor.fetchone()[0]
 
 
 def remover_item_iventario(id, id_item):
@@ -334,7 +331,7 @@ def adicionar_item_iventario(id, id_instancia_item):
     id_mochila = get_mochila_id(id)
     cursor.execute(f"INSERT INTO mochila_guarda_instancia_de_item VALUES ({id_mochila},{id_instancia_item})")
     conn.commit()
-    return cursor.fetchall()
+    return True
 
 
 def get_bioma(id_bioma):

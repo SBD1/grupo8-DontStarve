@@ -289,7 +289,6 @@ def craft(jogador, posicao):
             lista_crafts = bd.get_crafts(False)
 
         i = 1
-        print(lista_crafts[0].id)
         for craft in lista_crafts:
             print(f'[{i}] {craft.nome}')
             i+=1
