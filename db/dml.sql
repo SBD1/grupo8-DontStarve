@@ -4,7 +4,7 @@
 INSERT INTO mapa VALUES (DEFAULT, '1997-08-24', 25, 'p');
 
 -- bioma
-INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.1, 5, 'floresta');
+INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 1, 5, 'floresta');
 
 INSERT INTO bioma (id, chance_batalha, delta_temp, nome) VALUES (DEFAULT, 0.2, 10, 'pantano');
 
@@ -220,7 +220,7 @@ INSERT INTO instancia_item_posicao VALUES (3, 3); -- workbench na posicao 3
 --( nome,dano,descricao,vida,isca,posicao)
 
 
-INSERT INTO monstro VALUES (DEFAULT,'Sapo',2,'Sapo está irritado com sua presença, ele se prepara pra lhe atacar',10,1,148);
+INSERT INTO monstro VALUES (DEFAULT,'Sapo',2,'Sapo está irritado com sua presença, ele se prepara pra lhe atacar',10,1,135);
 INSERT INTO monstro VALUES (DEFAULT,'Sucuri',4,'Uma jovem sucuri lhe encontra e está preste a lhe atacar',20,2,85);
 INSERT INTO monstro VALUES (DEFAULT,'Jacare',8,'Um grande jacare faminto pronto pra atacar qualquer um que encontrar',35,4,118);
 INSERT INTO monstro VALUES (DEFAULT,'Pumba(BOSS)',14,'Pumba é considerado o rei do Pantano, sua quantidade de vida é gigante e seu dano fenomenal',100,7,82);

@@ -32,7 +32,6 @@ def verificar_luta(jogador, id_pos):
     bioma = bd.get_bioma(pos.bioma)
 
     sorte = random.uniform(0, 1)
-    input(str(sorte) + ' ' +str(bioma.chance_batalha))
     if sorte <= bioma.chance_batalha:
         monstros = bd.get_monstros_by_pos(id_pos)
 

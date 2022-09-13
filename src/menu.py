@@ -127,7 +127,7 @@ def menu_jogador(jogador):
         clear()
         posicao_jogador = bd.get_posicao_jogador(jogador.id)
         print(posicao_jogador.descricao)
-        
+        jogador = bd.get_jogador_id(jogador.id)
         print('\n[i] Vida: ' + str(jogador.vida))
 
         print(_txt_menu_jogador)
