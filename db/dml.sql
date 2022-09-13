@@ -106,58 +106,58 @@ INSERT INTO posicao VALUES (88,1, 1, NULL, 97, 89, 87, 'Ao norte existe um rio b
 INSERT INTO posicao VALUES (89,1, 1, NULL, 98, 90, 88, 'Ao norte existe um rio belissimo mas está cheio de piranhas famintas, com certeza não é um caminho bom de fazer. Talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (90,1, 1, NULL, 99, NULL, 89, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali, muito menos pelo rio de piranhas no norte',0,0);
 INSERT INTO posicao VALUES (91,1, 2, 82, 100, 92, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (92,1, 2, 83, 101, 93, 91, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (93,1, 2, 84, 102, 94, 92, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (92,1, 2, 83, 101, 93, 91, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (93,1, 2, 84, 102, 94, 92, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (94,1, 2, 85, 103, 95, 93, 'A leste existe um rio intransponivel é impossivel passar por ali, ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (95,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (96,1, 1, 87, 105, 97, NULL, 'Um rio com correnteza extramamente forte se encontra a oeste, é melhor não seguir por ai, talvez exista uma forma de passa como por exemplo uma ponte',0,0);
-INSERT INTO posicao VALUES (97,1, 1, 88, 106, 98, 96, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (98,1, 1, 89, 107, 99, 97, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (97,1, 1, 88, 106, 98, 96, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (98,1, 1, 89, 107, 99, 97, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (99,1, 1, 90, 108, NULL, 98, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (100,1, 2, 91, 109, 101, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (101,1, 2, 92, 110, 102, 100, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (102,1, 2, 93, 111, 103, 101, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (101,1, 2, 92, 110, 102, 100, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (102,1, 2, 93, 111, 103, 101, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (103,1, 2, 94, 112, 104, 102, 'A leste existe um rio intransponivel é impossivel passar por ali, ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (104,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (105,1, 1, 96, 114, 106, NULL, 'Um rio com correnteza extramamente forte se encontra a oeste, é melhor não seguir por ai, talvez exista uma forma de passa como por exemplo uma ponte',0,0);
-INSERT INTO posicao VALUES (106,1, 1, 97, 115, 107, 105, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (107,1, 1, 98, 116, 108, 106, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (106,1, 1, 97, 115, 107, 105, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (107,1, 1, 98, 116, 108, 106, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (108,1, 1, 99, 117, NULL, 107, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (109,1, 2, 100, 118, 110, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (110,1, 2, 101, 119, 111, 109, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (111,1, 2, 102, 120, 112, 110, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (110,1, 2, 101, 119, 111, 109, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (111,1, 2, 102, 120, 112, 110, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (112,1, 2, 103, 121, 113, 111, 'A leste se encontra um ponta velha talvez possa passar por lá',0,0);
 INSERT INTO posicao VALUES (113,1, 5, NULL, NULL, 114, 112, 'nesta posição existe uma ponte que não está em boas condições, seja rapido em sua pericia e avance logo em dia direção desejada. não se sabe quanto tempo ela irá aguentar seu peso sobre a ponte durar.',0,0);
 INSERT INTO posicao VALUES (114,1, 1, 105, 123, 115, 113, 'A oeste é possivel ver uma ponte velha talvez dê para passar por ali',0,0);
-INSERT INTO posicao VALUES (115,1, 1, 106, 124, 116, 114, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (116,1, 1, 107, 125, 117, 115, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (115,1, 1, 106, 124, 116, 114, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (116,1, 1, 107, 125, 117, 115, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (117,1, 1, 108, 126, NULL, 116, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
 INSERT INTO posicao VALUES (118,1, 2, 109, 127, 119, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (119,1, 2, 110, 128, 120, 118, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (120,1, 2, 111, 129, 121, 119, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (119,1, 2, 110, 128, 120, 118, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (120,1, 2, 111, 129, 121, 119, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (121,1, 2, 112, 130, 122, 120, 'A leste existe um rio intransponivel é impossivel passar por ali, ache outro caminho.',0,0);
 INSERT INTO posicao VALUES (122,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (123,1, 1, 114, 132, 124, NULL, 'Um rio com correnteza extramamente forte se encontra a oeste, é melhor não seguir por ai, talvez exista uma forma de passa como por exemplo uma ponte',0,0);
-INSERT INTO posicao VALUES (124,1, 1, 115, 133, 125, 123, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (125,1, 1, 116, 134, 126, 124, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (124,1, 1, 115, 133, 125, 123, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (125,1, 1, 116, 134, 126, 124, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (126,1, 1, 117, 135, NULL, 125, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
 INSERT INTO posicao VALUES (127,1, 2, 118, 136, 128, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (128,1, 2, 119, 137, 129, 127, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (129,1, 2, 120, 138, 130, 128, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (128,1, 2, 119, 137, 129, 127, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (129,1, 2, 120, 138, 130, 128, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (130,1, 2, 121, 139, 131, 129, 'A leste existe um rio intransponivel é impossivel passar por ali, ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (131,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (132,1, 1, 123, 141, 133, NULL, 'Um rio com correnteza extramamente forte se encontra a oeste, é melhor não seguir por ai, talvez exista uma forma de passa como por exemplo uma ponte',0,0);
-INSERT INTO posicao VALUES (133,1, 1, 124, 142, 134, 132, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (134,1, 1, 125, 143, 135, 133, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (133,1, 1, 124, 142, 134, 132, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (134,1, 1, 125, 143, 135, 133, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (135,1, 1, 126, 144, NULL, 134, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
 INSERT INTO posicao VALUES (136,1, 2, 127, 145, 137, NULL, 'O jogar se encontra em um empasse, a oeste ele encontrar nada além de escuridão e resolve não seguir por ali',0,0);
-INSERT INTO posicao VALUES (137,1, 2, 128, 146, 138, 136, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
-INSERT INTO posicao VALUES (138,1, 2, 129, 147, 139, 137, 'você possui dificuldade de andar e praticamente não consegue enchergar oque está no chão sem toca-lo.',0,0);
+INSERT INTO posicao VALUES (137,1, 2, 128, 146, 138, 136, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
+INSERT INTO posicao VALUES (138,1, 2, 129, 147, 139, 137, 'Aqui existe um pantano pegajoso, só de andar já é dificil para todo lugar que olha há feras',0,0);
 INSERT INTO posicao VALUES (139,1, 2, 130, 148, 140, 138, 'A leste existe um rio intransponivel é impossivel passar por ali, ache outro caminho, talvez exista uma ponte',0,0);
 INSERT INTO posicao VALUES (140,1, 6, NULL, NULL, NULL, NULL, 'nesta posição existe um rio intransponível  de cor escura. não há nada para se fazer aqui',0,0);
 INSERT INTO posicao VALUES (141,1, 1, 132, 150, 142, NULL, 'Um rio com correnteza extramamente forte se encontra a oeste, é melhor não seguir por ai, talvez exista uma forma de passa como por exemplo uma ponte',0,0);
-INSERT INTO posicao VALUES (142,1, 1, 133, 151, 143, 141, 'Passarinhos e anões .',0,0);
-INSERT INTO posicao VALUES (143,1, 1, 134, 152, 144, 142, 'Passarinhos e anões .',0,0);
+INSERT INTO posicao VALUES (142,1, 1, 133, 151, 143, 141, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
+INSERT INTO posicao VALUES (143,1, 1, 134, 152, 144, 142, 'voçê se encontrar em uma floresta fechada, pode ser  perigosa mas é rica em recursos',0,0);
 INSERT INTO posicao VALUES (144,1, 1, 135, 153, NULL, 143, 'a leste é possivel ver um penhasco extremamente profundo é melhor não ir por ali',0,0);
 INSERT INTO posicao VALUES (145,1, 2, 136, NULL, 146, NULL, 'Você foi longe demais!! se encontra cercado por montanhas gigantescas o unico caminho possivel se encontra a norte e a leste',0,0);
 INSERT INTO posicao VALUES (146,1, 2, 137, NULL, 147, 145, 'Ao sul é possivel encontrar uma montanha intransponível é melhor ir por outra direção, talvez exista uma ponte ',0,0);
@@ -172,20 +172,20 @@ INSERT INTO posicao VALUES (153,1, 1, 144, NULL, NULL, 152, 'Você foi longe dem
 
 -- arma
 
-INSERT INTO arma VALUES (DEFAULT, 'Espada de Pedra', 4, 'Espada fraca criada apartir de X pedras e X madeiras, é essencial para sobreviver a encontro de inimigos');
-INSERT INTO arma VALUES (DEFAULT, 'Espada de Ferro', 10, 'Espada Forte craida apartir de X ferro, X madeiras e X cipos, é uma espada incrivelmente versatil para batalhas contra inimigos fortes');
-INSERT INTO arma VALUES (DEFAULT, 'Espada Suprema', 20, 'Espada Suprema craida apartir de X ferro, X madeiras e X cipos, é uma espada incrivelmente versatil para batalhas contra inimigos fortes');
+INSERT INTO arma VALUES (DEFAULT, 'Espada de Pedra', 4, 'Espada fraca criada apartir de 15 pedras e 15 madeiras, é essencial para sobreviver a encontro de inimigos');
+INSERT INTO arma VALUES (DEFAULT, 'Espada de Ferro', 10, 'Espada Forte craida apartir de 5 ferro, 40 madeiras , é uma espada incrivelmente versatil para batalhas contra inimigos fortes');
+INSERT INTO arma VALUES (DEFAULT, 'Espada Suprema', 20, 'Espada Suprema craida apartir de 10 ferro, 80 madeiras , é uma espada incrivelmente versatil para batalhas contra inimigos fortes');
 
 -- ferramenta
 
 INSERT INTO ferramenta VALUES (DEFAULT, 'Machado Quebrado', 'pegar_madeira(jogador, 1)', 'Esse Machado aparenta está em pessimas condições mas ainda é possivel obter madeira de arvores');
-INSERT INTO ferramenta VALUES (DEFAULT, 'Machado Fraco', 'pegar_madeira(jogador, 2)', 'Machado fraco contruido apartir de X pedras, X madeiras e X cipos');
-INSERT INTO ferramenta VALUES (DEFAULT, 'Machado de Ferro', 'pegar_madeira(jogador, 3)', 'Machado de Ferro contruido apartir de X ferros , X madeiras e X cipos');
+INSERT INTO ferramenta VALUES (DEFAULT, 'Machado Fraco', 'pegar_madeira(jogador, 2)', 'Machado fraco contruido apartir de 15 pedras, 15 madeiras ');
+INSERT INTO ferramenta VALUES (DEFAULT, 'Machado de Ferro', 'pegar_madeira(jogador, 3)', 'Machado de Ferro contruido apartir de 3 ferros , 30 madeiras ');
 
 
 INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta Detreriorada', 'pegar_pedra(jogador, 1)', 'Essa picareta está quase completamente detreriorada mas ainda é posssivel obter pedras de rochas');
-INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta de Madeira', 'pegar_pedra(jogador, 2)', 'Picareta de Madeira contruido apartir de X pedras, X madeiras e X cipos');
-INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta de Ferro', 'pegar_pedra(jogador, 3)', 'Picareta de Ferro contruido apartir de X ferros , X madeiras e X cipos');
+INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta de Madeira', 'pegar_pedra(jogador, 2)', 'Picareta de Madeira contruido apartir de 15 pedras, 15 madeiras e ');
+INSERT INTO ferramenta VALUES (DEFAULT, 'Picareta de Ferro', 'pegar_pedra(jogador, 3)', 'Picareta de Ferro contruido apartir de 3 ferros , 30 madeiras ');
 
 
 INSERT INTO ferramenta VALUES (DEFAULT, 'Workbench', 'colocar_na_pos(jogador, 11)', 'workbench é o principal item para criação de novas ferramentas e armas');
@@ -229,7 +229,7 @@ INSERT INTO monstro VALUES (DEFAULT,'Pumba(BOSS)',14,'Pumba é considerado o rei
 INSERT INTO monstro VALUES (DEFAULT,'Lagarto',2,'Um largarto pequeno e extrassado pronto para atacar todos',3,1,65);
 INSERT INTO monstro VALUES (DEFAULT,'escorpiao',6,'Um dos monstro ferozes do deserto, sua baixa vida compensa ao seu alto dano',15,6,39);
 INSERT INTO monstro VALUES (DEFAULT,'Camelo',4,'Camelo mutante do deserto,após anos de andarilho esse camelo criou uma proteção quase que inquebravel com uma vida enorme',50,9,57);
-INSERT INTO monstro VALUES (DEFAULT,'Vermes da areia(BOSS)',15,'é o rei do deserto, sua enorme boca consegue devorar até o maior dos seres',NULL,15,13);
+INSERT INTO monstro VALUES (DEFAULT,'Vermes da areia(BOSS)',15,'é o rei do deserto, sua enorme boca consegue devorar até o maior dos seres',80,15,13);
 
 -- (Floresta)
 INSERT INTO monstro VALUES (DEFAULT,'Perna Longa',1,'Durante anos e anos a fio essa lebre se aventura pela floresta, é relativamente fraco',10,1,90);
