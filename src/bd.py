@@ -3,7 +3,7 @@ import re
 from unittest import result
 import psycopg2
 conn = psycopg2.connect(
-    host = "0.0.0.0",
+    host = "db",
     port = "5432",
     database="dontstarve",
     user="sbd1",
@@ -47,7 +47,7 @@ def novo_jogador(nome: str):
     cursor.execute(f"INSERT INTO mochila VALUES (DEFAULT);")
     cursor.execute(f"SELECT id FROM mochila ORDER BY  id  DESC LIMIT 1;")
     id_mochila = cursor.fetchone()
-    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 3,NULL,NULL);")
+    cursor.execute(f"INSERT INTO jogador VALUES (DEFAULT,'{nome}',100,36,{id_mochila[0]}, 153,NULL,NULL);")
     cursor.execute(f"SELECT id FROM jogador ORDER BY  id  DESC LIMIT 1;")
     id = cursor.fetchone()
     conn.commit()
@@ -154,13 +154,11 @@ def get_posicao(id_pos):
     position.leste = aux[5]
     position.oeste = aux[6]
     position.descricao = aux[7]
-    ## TODO implementar pedras
     position.pedras =  aux[8]
     position.madeiras = aux[9]
     return position
 
 
-## TODO
 def set_pedras(id_pos, pedras):
     cursor.execute(f"UPDATE posicao SET pedras = {pedras} WHERE id = {id_pos}")
     conn.commit()
@@ -316,7 +314,6 @@ def verificar_inventario(id, id_item, quantidade = 1):
             return True
     return False
 
-    #TODO return id instancia item
 def criar_instancia_item(id_item,tipo):
     # criar uma nova instancia de item e retornar seu id
     cursor.execute(f"INSERT INTO instancia_item VALUES (DEFAULT,{id_item},'{tipo}')")
